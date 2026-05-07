@@ -1,10 +1,12 @@
-<html lang="en" data-theme="dark"><head>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>SmartCart — Batch 1 Wireframes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -620,14 +622,14 @@
 
   <!-- NAV -->
   <div class="nav-bar">
-    <button class="nav-btn" onclick="goTo(1)">1 · Splash</button>
+    <button class="nav-btn active" onclick="goTo(1)">1 · Splash</button>
     <button class="nav-btn" onclick="goTo(2)">2 · Onboarding</button>
     <button class="nav-btn" onclick="goTo(3)">3 · Store Pick</button>
-    <button class="nav-btn active" onclick="goTo(4)">4 · Permissions</button>
+    <button class="nav-btn" onclick="goTo(4)">4 · Permissions</button>
   </div>
 
   <!-- SCREEN LABEL -->
-  <div id="screen-label" class="screen-label">Screen 4 — Notification Permission</div>
+  <div id="screen-label" class="screen-label">Screen 1 — Splash / Launch</div>
 
   <!-- PHONE -->
   <div class="phone">
@@ -638,20 +640,20 @@
       <div class="time">9:41</div>
       <div class="status-icons">
         <svg width="17" height="12" viewBox="0 0 17 12" fill="white">
-          <rect x="0" y="3" width="3" height="9" rx="1"></rect>
-          <rect x="4.5" y="2" width="3" height="10" rx="1"></rect>
-          <rect x="9" y="0" width="3" height="12" rx="1"></rect>
-          <rect x="13.5" y="0" width="3" height="12" rx="1" opacity="0.3"></rect>
+          <rect x="0" y="3" width="3" height="9" rx="1"/>
+          <rect x="4.5" y="2" width="3" height="10" rx="1"/>
+          <rect x="9" y="0" width="3" height="12" rx="1"/>
+          <rect x="13.5" y="0" width="3" height="12" rx="1" opacity="0.3"/>
         </svg>
         <svg width="16" height="12" viewBox="0 0 16 12" fill="white">
-          <path d="M8 2.4C10.2 2.4 12.2 3.3 13.6 4.8L15 3.3C13.2 1.2 10.8 0 8 0 5.2 0 2.8 1.2 1 3.3L2.4 4.8C3.8 3.3 5.8 2.4 8 2.4Z"></path>
-          <path d="M8 5.6C9.4 5.6 10.6 6.2 11.5 7.1L12.9 5.6C11.6 4.3 9.9 3.5 8 3.5 6.1 3.5 4.4 4.3 3.1 5.6L4.5 7.1C5.4 6.2 6.6 5.6 8 5.6Z"></path>
-          <circle cx="8" cy="10.5" r="1.5"></circle>
+          <path d="M8 2.4C10.2 2.4 12.2 3.3 13.6 4.8L15 3.3C13.2 1.2 10.8 0 8 0 5.2 0 2.8 1.2 1 3.3L2.4 4.8C3.8 3.3 5.8 2.4 8 2.4Z"/>
+          <path d="M8 5.6C9.4 5.6 10.6 6.2 11.5 7.1L12.9 5.6C11.6 4.3 9.9 3.5 8 3.5 6.1 3.5 4.4 4.3 3.1 5.6L4.5 7.1C5.4 6.2 6.6 5.6 8 5.6Z"/>
+          <circle cx="8" cy="10.5" r="1.5"/>
         </svg>
         <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
-          <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="white" stroke-opacity="0.35"></rect>
-          <rect x="2" y="2" width="16" height="8" rx="2" fill="white"></rect>
-          <path d="M23 4.5V7.5C23.8 7.2 24.5 6.7 24.5 6 24.5 5.3 23.8 4.8 23 4.5Z" fill="white" opacity="0.4"></path>
+          <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="white" stroke-opacity="0.35"/>
+          <rect x="2" y="2" width="16" height="8" rx="2" fill="white"/>
+          <path d="M23 4.5V7.5C23.8 7.2 24.5 6.7 24.5 6 24.5 5.3 23.8 4.8 23 4.5Z" fill="white" opacity="0.4"/>
         </svg>
       </div>
     </div>
@@ -660,14 +662,14 @@
     <div class="screens">
 
       <!-- S1: SPLASH -->
-      <div class="screen" id="s1">
+      <div class="screen active" id="s1">
         <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;">
           <div class="splash-logo">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <path d="M12 14C12 11.8 13.8 10 16 10H32C34.2 10 36 11.8 36 14V20H40L37 32H11L8 20H12V14Z" stroke="black" stroke-width="2.5" fill="none"></path>
-              <circle cx="17" cy="37" r="3" fill="black"></circle>
-              <circle cx="31" cy="37" r="3" fill="black"></circle>
-              <path d="M20 22L23 25L28 19" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M12 14C12 11.8 13.8 10 16 10H32C34.2 10 36 11.8 36 14V20H40L37 32H11L8 20H12V14Z" stroke="black" stroke-width="2.5" fill="none"/>
+              <circle cx="17" cy="37" r="3" fill="black"/>
+              <circle cx="31" cy="37" r="3" fill="black"/>
+              <path d="M20 22L23 25L28 19" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
           <div class="splash-name">SmartCart</div>
@@ -684,7 +686,7 @@
           <button class="ob-skip" onclick="goTo(3)">Skip</button>
         </div>
         <div class="ob-slides-wrapper">
-          <div class="ob-slides" id="ob-slides" style="transform: translateX(0%);">
+          <div class="ob-slides" id="ob-slides">
 
             <!-- Slide 1 -->
             <div class="ob-slide ob-slide-1">
@@ -710,19 +712,19 @@
               <div class="ob-illustration">
                 <svg width="200" height="110" viewBox="0 0 200 110" fill="none">
                   <!-- Grid lines -->
-                  <line x1="20" y1="90" x2="180" y2="90" stroke="rgba(255,255,255,0.08)" stroke-width="1"></line>
-                  <line x1="20" y1="65" x2="180" y2="65" stroke="rgba(255,255,255,0.08)" stroke-width="1"></line>
-                  <line x1="20" y1="40" x2="180" y2="40" stroke="rgba(255,255,255,0.08)" stroke-width="1"></line>
-                  <line x1="20" y1="15" x2="180" y2="15" stroke="rgba(255,255,255,0.08)" stroke-width="1"></line>
+                  <line x1="20" y1="90" x2="180" y2="90" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                  <line x1="20" y1="65" x2="180" y2="65" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                  <line x1="20" y1="40" x2="180" y2="40" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                  <line x1="20" y1="15" x2="180" y2="15" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
                   <!-- Price line -->
-                  <polyline points="20,72 50,68 80,55 110,60 140,48 170,35 180,32" stroke="#0a84ff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                  <polyline points="20,72 50,68 80,55 110,60 140,48 170,35 180,32" stroke="#0a84ff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                   <!-- Historical low line -->
-                  <line x1="20" y1="35" x2="180" y2="35" stroke="rgba(48,209,88,0.4)" stroke-width="1.5" stroke-dasharray="4,3"></line>
+                  <line x1="20" y1="35" x2="180" y2="35" stroke="rgba(48,209,88,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
                   <!-- Current dot -->
-                  <circle cx="180" cy="32" r="5" fill="#0a84ff"></circle>
-                  <circle cx="180" cy="32" r="9" fill="#0a84ff" opacity="0.2"></circle>
+                  <circle cx="180" cy="32" r="5" fill="#0a84ff"/>
+                  <circle cx="180" cy="32" r="9" fill="#0a84ff" opacity="0.2"/>
                   <!-- Low badge -->
-                  <rect x="130" y="20" width="50" height="18" rx="9" fill="rgba(48,209,88,0.15)" stroke="rgba(48,209,88,0.4)" stroke-width="1"></rect>
+                  <rect x="130" y="20" width="50" height="18" rx="9" fill="rgba(48,209,88,0.15)" stroke="rgba(48,209,88,0.4)" stroke-width="1"/>
                   <text x="155" y="33" text-anchor="middle" fill="#30d158" font-size="10" font-weight="600" font-family="Inter">AT LOW</text>
                   <!-- Y-axis labels -->
                   <text x="14" y="93" text-anchor="end" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter">$4</text>
@@ -776,7 +778,7 @@
       <div class="screen" id="s3">
         <div class="screen-nav">
           <div class="back-btn" onclick="goTo(2)">
-            <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="step-indicator">Step 1 of 2</div>
           <div style="width:36px;"></div>
@@ -788,20 +790,20 @@
         </div>
 
         <div class="search-bar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
-          <input type="text" placeholder="Search stores…" readonly="">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" placeholder="Search stores…" readonly>
         </div>
 
         <div class="store-list" id="store-list">
           <div class="store-row selected" onclick="toggleStore(this)">
             <div class="store-logo store-loblaws">Lob-<br>laws</div>
             <div class="store-info"><div class="store-name">Loblaws</div><div class="store-type">Grocery chain</div></div>
-            <div class="store-check"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4L4.5 7.5L11 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+            <div class="store-check"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4L4.5 7.5L11 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           </div>
           <div class="store-row selected" onclick="toggleStore(this)">
             <div class="store-logo store-nofrills">No<br>Frills</div>
             <div class="store-info"><div class="store-name">No Frills</div><div class="store-type">Discount grocery</div></div>
-            <div class="store-check"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4L4.5 7.5L11 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+            <div class="store-check"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4L4.5 7.5L11 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           </div>
           <div class="store-row" onclick="toggleStore(this)">
             <div class="store-logo store-metro">Metro</div>
@@ -852,13 +854,13 @@
       </div>
 
       <!-- S4: NOTIFICATION PERMISSION -->
-      <div class="screen active" id="s4">
+      <div class="screen" id="s4">
         <div class="perm-content">
           <div class="perm-icon-wrap">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <path d="M24 6C24 6 14 10 14 22V30L10 34V36H38V34L34 30V22C34 10 24 6 24 6Z" stroke="#30d158" stroke-width="2.5" fill="rgba(48,209,88,0.1)" stroke-linejoin="round"></path>
-              <path d="M20 36C20 38.2 21.8 40 24 40C26.2 40 28 38.2 28 36" stroke="#30d158" stroke-width="2.5" stroke-linecap="round"></path>
-              <circle cx="36" cy="12" r="6" fill="#ff453a"></circle>
+              <path d="M24 6C24 6 14 10 14 22V30L10 34V36H38V34L34 30V22C34 10 24 6 24 6Z" stroke="#30d158" stroke-width="2.5" fill="rgba(48,209,88,0.1)" stroke-linejoin="round"/>
+              <path d="M20 36C20 38.2 21.8 40 24 40C26.2 40 28 38.2 28 36" stroke="#30d158" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="36" cy="12" r="6" fill="#ff453a"/>
               <text x="36" y="16" text-anchor="middle" fill="white" font-size="8" font-weight="700" font-family="Inter">3</text>
             </svg>
           </div>
@@ -989,5 +991,5 @@
   setTimeout(() => { if (document.getElementById('s1').classList.contains('active')) goTo(2); }, 2000);
 </script>
 
-
-</body></html><!-- See attached file content: smartcart-batch1-wireframes.html -->
+</body>
+</html>
