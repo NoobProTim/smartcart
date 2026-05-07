@@ -1,1 +1,993 @@
-<!-- See attached file content: smartcart-batch1-wireframes.html -->
+<html lang="en" data-theme="dark"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SmartCart — Batch 1 Wireframes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --font: 'Inter', -apple-system, sans-serif;
+    --green: #30d158;
+    --green-dim: #1a7a33;
+    --blue: #0a84ff;
+    --yellow: #ffd60a;
+    --red: #ff453a;
+    --bg: #000;
+    --surface-1: #1c1c1e;
+    --surface-2: #2c2c2e;
+    --surface-3: #3a3a3c;
+    --border: rgba(255,255,255,0.10);
+    --text: #ffffff;
+    --text-2: rgba(255,255,255,0.72);
+    --text-3: rgba(255,255,255,0.42);
+    --radius-card: 16px;
+    --radius-btn: 12px;
+    --safe-top: 54px;
+    --safe-bot: 34px;
+  }
+
+  html, body {
+    height: 100%;
+    background: #111;
+    font-family: var(--font);
+    color: var(--text);
+    overflow: hidden;
+  }
+
+  /* ── SHELL ── */
+  .shell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 20px;
+  }
+
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px;
+  }
+
+  .nav-btn {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { background: var(--surface-3); color: var(--text); }
+  .nav-btn.active { background: var(--green); color: #000; border-color: var(--green); }
+
+  .screen-label {
+    color: var(--text-3);
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── PHONE FRAME ── */
+  .phone {
+    width: 390px;
+    height: 844px;
+    background: var(--bg);
+    border-radius: 54px;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 0 0 8px #1c1c1e, 0 40px 80px rgba(0,0,0,0.8);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  /* Status bar */
+  .status-bar {
+    height: var(--safe-top);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 28px 10px;
+    position: relative;
+    z-index: 10;
+  }
+  .status-bar .time { font-size: 15px; font-weight: 600; }
+  .status-icons { display: flex; gap: 6px; align-items: center; }
+  .status-icons svg { opacity: 0.9; }
+
+  /* Dynamic island */
+  .dynamic-island {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 36px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 20;
+  }
+
+  /* Screens container */
+  .screens { position: relative; width: 100%; height: calc(844px - var(--safe-top)); }
+  .screen {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow: hidden;
+  }
+  .screen.active { opacity: 1; pointer-events: all; }
+
+  /* ── SPLASH ── */
+  #s1 {
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .splash-logo {
+    width: 88px;
+    height: 88px;
+    background: var(--green);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .splash-logo svg { color: #000; }
+  .splash-name { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; }
+  .splash-tagline { font-size: 16px; color: var(--text-2); }
+  .splash-loader {
+    margin-top: 32px;
+    width: 36px;
+    height: 4px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .splash-loader-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--green);
+    border-radius: 2px;
+    animation: loading 1.4s ease-out forwards;
+  }
+  @keyframes loading { 0%{width:0%} 60%{width:80%} 100%{width:100%} }
+
+  /* ── ONBOARDING CAROUSEL ── */
+  #s2 {
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .ob-header {
+    padding: 16px 24px 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .ob-skip {
+    font-size: 15px;
+    color: var(--green);
+    background: none;
+    border: none;
+    font-family: var(--font);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px 0;
+  }
+  .ob-slides-wrapper {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+  .ob-slides {
+    display: flex;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .ob-slide {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 32px;
+    gap: 0;
+  }
+  .ob-illustration {
+    width: 260px;
+    height: 260px;
+    border-radius: 32px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .ob-slide-1 .ob-illustration { background: linear-gradient(135deg, #1a3a1a 0%, #0d2b0d 100%); }
+  .ob-slide-2 .ob-illustration { background: linear-gradient(135deg, #0d2240 0%, #071428 100%); }
+  .ob-slide-3 .ob-illustration { background: linear-gradient(135deg, #2a1a0a 0%, #1a1004 100%); }
+
+  /* Illustration: Receipt */
+  .illus-receipt {
+    width: 100px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    padding: 10px;
+  }
+  .illus-receipt-line {
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+    margin-bottom: 6px;
+  }
+  .illus-receipt-line.short { width: 60%; }
+  .illus-receipt-line.green { background: var(--green); opacity: 0.7; }
+  .illus-scan-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: scan 2s ease-in-out infinite;
+    left: 0;
+  }
+  .illus-receipt { position: relative; overflow: hidden; }
+  @keyframes scan { 0%,100%{top:10px;opacity:1} 50%{top:90px;opacity:0.6} }
+
+  /* Illustration: Graph */
+  .illus-graph {
+    width: 120px;
+    height: 70px;
+    position: relative;
+  }
+  .illus-graph svg { width: 100%; height: 100%; }
+
+  /* Illustration: Notification */
+  .illus-notif {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 14px;
+    width: 190px;
+  }
+  .illus-notif-icon { font-size: 22px; margin-bottom: 6px; }
+  .illus-notif-title { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+  .illus-notif-body { font-size: 11px; color: var(--text-2); }
+  .notif-dot {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    position: absolute;
+    top: 12px; right: 12px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:0.6} }
+
+  .ob-headline {
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+    margin-bottom: 12px;
+  }
+  .ob-sub {
+    font-size: 15px;
+    color: var(--text-2);
+    text-align: center;
+    line-height: 1.5;
+    max-width: 280px;
+  }
+
+  .ob-footer {
+    padding: 0 24px var(--safe-bot);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .ob-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .ob-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--surface-3);
+    transition: all 0.3s ease;
+  }
+  .ob-dot.active {
+    width: 20px;
+    border-radius: 4px;
+    background: var(--green);
+  }
+  .ob-btn-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+  }
+  .btn-primary {
+    flex: 1;
+    background: var(--green);
+    color: #000;
+    border: none;
+    border-radius: var(--radius-btn);
+    height: 54px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-secondary {
+    background: var(--surface-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+    height: 54px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: var(--font);
+    cursor: pointer;
+    padding: 0 20px;
+    transition: background 0.15s;
+  }
+  .btn-secondary:hover { background: var(--surface-3); }
+
+  /* ── STORE SELECTION ── */
+  #s3 {
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .screen-nav {
+    padding: 16px 24px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .back-btn {
+    width: 36px; height: 36px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text);
+  }
+  .step-indicator {
+    font-size: 13px;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+  .screen-title-block {
+    padding: 4px 24px 20px;
+  }
+  .screen-title { font-size: 24px; font-weight: 700; letter-spacing: -0.3px; }
+  .screen-subtitle { font-size: 14px; color: var(--text-2); margin-top: 4px; }
+
+  .search-bar {
+    margin: 0 24px 16px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 14px;
+    height: 44px;
+  }
+  .search-bar input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    color: var(--text);
+    font-family: var(--font);
+  }
+  .search-bar input::placeholder { color: var(--text-3); }
+
+  .store-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 24px;
+    scrollbar-width: none;
+  }
+  .store-list::-webkit-scrollbar { display: none; }
+
+  .store-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .store-row:last-child { border-bottom: none; }
+  .store-logo {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    text-align: center;
+    line-height: 1.1;
+  }
+  .store-info { flex: 1; }
+  .store-name { font-size: 15px; font-weight: 500; }
+  .store-type { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+  .store-check {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--surface-3);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .store-row.selected .store-check {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .store-footer {
+    padding: 16px 24px var(--safe-bot);
+    border-top: 1px solid var(--border);
+  }
+  .store-footer-hint {
+    font-size: 12px;
+    color: var(--text-3);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .btn-primary.disabled {
+    background: var(--surface-3);
+    color: var(--text-3);
+    pointer-events: none;
+  }
+
+  /* ── NOTIFICATION PERMISSION ── */
+  #s4 {
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 48px 32px var(--safe-bot);
+  }
+  .perm-icon-wrap {
+    width: 96px; height: 96px;
+    background: linear-gradient(135deg, #1a3a1a, #0d2b0d);
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .perm-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .perm-title { font-size: 26px; font-weight: 700; text-align: center; letter-spacing: -0.3px; margin-bottom: 14px; }
+  .perm-sub { font-size: 15px; color: var(--text-2); text-align: center; line-height: 1.55; max-width: 280px; }
+
+  .perm-examples {
+    width: 100%;
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .notif-pill {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    position: relative;
+  }
+  .notif-pill-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .notif-pill-text {}
+  .notif-pill-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .notif-pill-body { font-size: 12px; color: var(--text-2); }
+
+  .perm-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn-ghost {
+    background: none;
+    border: none;
+    color: var(--text-2);
+    font-size: 15px;
+    font-family: var(--font);
+    cursor: pointer;
+    padding: 14px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  /* System alert overlay */
+  .sys-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .sys-overlay.show { opacity: 1; pointer-events: all; }
+  .sys-alert {
+    background: #2c2c2e;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 270px;
+    overflow: hidden;
+  }
+  .sys-alert-body { padding: 20px 16px; text-align: center; }
+  .sys-alert-title { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+  .sys-alert-msg { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+  .sys-alert-actions { border-top: 1px solid rgba(255,255,255,0.1); display: flex; }
+  .sys-alert-btn {
+    flex: 1;
+    padding: 14px;
+    text-align: center;
+    font-size: 17px;
+    font-family: var(--font);
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--blue);
+    font-weight: 400;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .sys-alert-btn:last-child { border-right: none; font-weight: 600; }
+
+  /* ── SCROLLBAR NONE ── */
+  * { scrollbar-width: none; }
+  *::-webkit-scrollbar { display: none; }
+
+  /* Store colors */
+  .store-loblaws { background: #1a1a00; color: #c8b900; }
+  .store-nofrills { background: #1a0a00; color: #ff8c00; }
+  .store-metro { background: #000f1a; color: #0099ff; }
+  .store-sobeys { background: #1a0000; color: #ff2020; }
+  .store-freshco { background: #001a0a; color: #00cc66; }
+  .store-walmart { background: #00001a; color: #0071ce; }
+  .store-costco { background: #1a0000; color: #e31837; }
+  .store-foodbasics { background: #001a00; color: #4caf50; }
+  .store-gt { background: #1a0d00; color: #ff6600; }
+  .store-ig { background: #001a0a; color: #00b359; }
+
+  /* Progress bar top */
+  .progress-bar {
+    height: 3px;
+    background: var(--surface-2);
+    margin: 0 24px 0;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- NAV -->
+  <div class="nav-bar">
+    <button class="nav-btn" onclick="goTo(1)">1 · Splash</button>
+    <button class="nav-btn" onclick="goTo(2)">2 · Onboarding</button>
+    <button class="nav-btn" onclick="goTo(3)">3 · Store Pick</button>
+    <button class="nav-btn active" onclick="goTo(4)">4 · Permissions</button>
+  </div>
+
+  <!-- SCREEN LABEL -->
+  <div id="screen-label" class="screen-label">Screen 4 — Notification Permission</div>
+
+  <!-- PHONE -->
+  <div class="phone">
+    <div class="dynamic-island"></div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <div class="time">9:41</div>
+      <div class="status-icons">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="white">
+          <rect x="0" y="3" width="3" height="9" rx="1"></rect>
+          <rect x="4.5" y="2" width="3" height="10" rx="1"></rect>
+          <rect x="9" y="0" width="3" height="12" rx="1"></rect>
+          <rect x="13.5" y="0" width="3" height="12" rx="1" opacity="0.3"></rect>
+        </svg>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="white">
+          <path d="M8 2.4C10.2 2.4 12.2 3.3 13.6 4.8L15 3.3C13.2 1.2 10.8 0 8 0 5.2 0 2.8 1.2 1 3.3L2.4 4.8C3.8 3.3 5.8 2.4 8 2.4Z"></path>
+          <path d="M8 5.6C9.4 5.6 10.6 6.2 11.5 7.1L12.9 5.6C11.6 4.3 9.9 3.5 8 3.5 6.1 3.5 4.4 4.3 3.1 5.6L4.5 7.1C5.4 6.2 6.6 5.6 8 5.6Z"></path>
+          <circle cx="8" cy="10.5" r="1.5"></circle>
+        </svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+          <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="white" stroke-opacity="0.35"></rect>
+          <rect x="2" y="2" width="16" height="8" rx="2" fill="white"></rect>
+          <path d="M23 4.5V7.5C23.8 7.2 24.5 6.7 24.5 6 24.5 5.3 23.8 4.8 23 4.5Z" fill="white" opacity="0.4"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- SCREENS -->
+    <div class="screens">
+
+      <!-- S1: SPLASH -->
+      <div class="screen" id="s1">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;">
+          <div class="splash-logo">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M12 14C12 11.8 13.8 10 16 10H32C34.2 10 36 11.8 36 14V20H40L37 32H11L8 20H12V14Z" stroke="black" stroke-width="2.5" fill="none"></path>
+              <circle cx="17" cy="37" r="3" fill="black"></circle>
+              <circle cx="31" cy="37" r="3" fill="black"></circle>
+              <path d="M20 22L23 25L28 19" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div class="splash-name">SmartCart</div>
+          <div class="splash-tagline">Know when to buy.</div>
+          <div class="splash-loader">
+            <div class="splash-loader-bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S2: ONBOARDING -->
+      <div class="screen" id="s2">
+        <div class="ob-header">
+          <button class="ob-skip" onclick="goTo(3)">Skip</button>
+        </div>
+        <div class="ob-slides-wrapper">
+          <div class="ob-slides" id="ob-slides" style="transform: translateX(0%);">
+
+            <!-- Slide 1 -->
+            <div class="ob-slide ob-slide-1">
+              <div class="ob-illustration">
+                <div class="illus-receipt">
+                  <div class="illus-receipt-line"></div>
+                  <div class="illus-receipt-line short"></div>
+                  <div class="illus-receipt-line green"></div>
+                  <div class="illus-receipt-line short"></div>
+                  <div class="illus-receipt-line green"></div>
+                  <div class="illus-receipt-line"></div>
+                  <div class="illus-receipt-line short green"></div>
+                  <div class="illus-scan-line"></div>
+                </div>
+                <div style="font-size:12px;color:var(--green);letter-spacing:0.5px;font-weight:600;margin-top:8px;">SCANNING RECEIPT</div>
+              </div>
+              <div class="ob-headline">SmartCart remembers<br>what you buy</div>
+              <div class="ob-sub">Scan any grocery receipt and we'll automatically track every item and price.</div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="ob-slide ob-slide-2">
+              <div class="ob-illustration">
+                <svg width="200" height="110" viewBox="0 0 200 110" fill="none">
+                  <!-- Grid lines -->
+                  <line x1="20" y1="90" x2="180" y2="90" stroke="rgba(255,255,255,0.08)" stroke-width="1"></line>
+                  <line x1="20" y1="65" x2="180" y2="65" stroke="rgba(255,255,255,0.08)" stroke-width="1"></line>
+                  <line x1="20" y1="40" x2="180" y2="40" stroke="rgba(255,255,255,0.08)" stroke-width="1"></line>
+                  <line x1="20" y1="15" x2="180" y2="15" stroke="rgba(255,255,255,0.08)" stroke-width="1"></line>
+                  <!-- Price line -->
+                  <polyline points="20,72 50,68 80,55 110,60 140,48 170,35 180,32" stroke="#0a84ff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                  <!-- Historical low line -->
+                  <line x1="20" y1="35" x2="180" y2="35" stroke="rgba(48,209,88,0.4)" stroke-width="1.5" stroke-dasharray="4,3"></line>
+                  <!-- Current dot -->
+                  <circle cx="180" cy="32" r="5" fill="#0a84ff"></circle>
+                  <circle cx="180" cy="32" r="9" fill="#0a84ff" opacity="0.2"></circle>
+                  <!-- Low badge -->
+                  <rect x="130" y="20" width="50" height="18" rx="9" fill="rgba(48,209,88,0.15)" stroke="rgba(48,209,88,0.4)" stroke-width="1"></rect>
+                  <text x="155" y="33" text-anchor="middle" fill="#30d158" font-size="10" font-weight="600" font-family="Inter">AT LOW</text>
+                  <!-- Y-axis labels -->
+                  <text x="14" y="93" text-anchor="end" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter">$4</text>
+                  <text x="14" y="68" text-anchor="end" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter">$5</text>
+                  <text x="14" y="43" text-anchor="end" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter">$6</text>
+                </svg>
+                <div style="font-size:12px;color:var(--blue);letter-spacing:0.5px;font-weight:600;margin-top:4px;">90-DAY PRICE HISTORY</div>
+              </div>
+              <div class="ob-headline">See real price history<br>for your items</div>
+              <div class="ob-sub">We track prices at your preferred stores so you can spot a genuine deal vs. regular price.</div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="ob-slide ob-slide-3">
+              <div class="ob-illustration">
+                <div class="illus-notif" style="position:relative;">
+                  <div class="notif-dot"></div>
+                  <div class="illus-notif-icon">🛒</div>
+                  <div class="illus-notif-title">Butter at No Frills</div>
+                  <div class="illus-notif-body">6-month low — $4.49<br>You usually restock in 2 days</div>
+                </div>
+                <div style="margin-top:14px;">
+                  <div class="illus-notif" style="position:relative;opacity:0.55;transform:scale(0.95);">
+                    <div class="illus-notif-icon">🏷️</div>
+                    <div class="illus-notif-title">Olive Oil on sale at Metro</div>
+                    <div class="illus-notif-body">$8.99 (was $12.49) · Ends in 3 days</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ob-headline">Get alerted when YOUR<br>items hit a low</div>
+              <div class="ob-sub">Alerts are personalised to what you buy and timed to when you actually need to restock.</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="ob-footer">
+          <div class="ob-dots">
+            <div class="ob-dot active" id="dot-0"></div>
+            <div class="ob-dot" id="dot-1"></div>
+            <div class="ob-dot" id="dot-2"></div>
+          </div>
+          <div class="ob-btn-row">
+            <button class="btn-secondary" id="ob-back-btn" onclick="obBack()" style="display:none;">Back</button>
+            <button class="btn-primary" id="ob-next-btn" onclick="obNext()">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3: STORE SELECTION -->
+      <div class="screen" id="s3">
+        <div class="screen-nav">
+          <div class="back-btn" onclick="goTo(2)">
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <div class="step-indicator">Step 1 of 2</div>
+          <div style="width:36px;"></div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+        <div class="screen-title-block" style="margin-top:16px;">
+          <div class="screen-title">Which stores do<br>you shop at?</div>
+          <div class="screen-subtitle">Select at least one to continue</div>
+        </div>
+
+        <div class="search-bar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+          <input type="text" placeholder="Search stores…" readonly="">
+        </div>
+
+        <div class="store-list" id="store-list">
+          <div class="store-row selected" onclick="toggleStore(this)">
+            <div class="store-logo store-loblaws">Lob-<br>laws</div>
+            <div class="store-info"><div class="store-name">Loblaws</div><div class="store-type">Grocery chain</div></div>
+            <div class="store-check"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4L4.5 7.5L11 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          </div>
+          <div class="store-row selected" onclick="toggleStore(this)">
+            <div class="store-logo store-nofrills">No<br>Frills</div>
+            <div class="store-info"><div class="store-name">No Frills</div><div class="store-type">Discount grocery</div></div>
+            <div class="store-check"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4L4.5 7.5L11 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          </div>
+          <div class="store-row" onclick="toggleStore(this)">
+            <div class="store-logo store-metro">Metro</div>
+            <div class="store-info"><div class="store-name">Metro</div><div class="store-type">Grocery chain</div></div>
+            <div class="store-check"></div>
+          </div>
+          <div class="store-row" onclick="toggleStore(this)">
+            <div class="store-logo store-sobeys">Sob-<br>eys</div>
+            <div class="store-info"><div class="store-name">Sobeys</div><div class="store-type">Grocery chain</div></div>
+            <div class="store-check"></div>
+          </div>
+          <div class="store-row" onclick="toggleStore(this)">
+            <div class="store-logo store-freshco">Fresh<br>Co</div>
+            <div class="store-info"><div class="store-name">FreshCo</div><div class="store-type">Discount grocery</div></div>
+            <div class="store-check"></div>
+          </div>
+          <div class="store-row" onclick="toggleStore(this)">
+            <div class="store-logo store-walmart">Wal-<br>mart</div>
+            <div class="store-info"><div class="store-name">Walmart Canada</div><div class="store-type">Supercenter</div></div>
+            <div class="store-check"></div>
+          </div>
+          <div class="store-row" onclick="toggleStore(this)">
+            <div class="store-logo store-costco">Cos-<br>tco</div>
+            <div class="store-info"><div class="store-name">Costco Canada</div><div class="store-type">Warehouse club</div></div>
+            <div class="store-check"></div>
+          </div>
+          <div class="store-row" onclick="toggleStore(this)">
+            <div class="store-logo store-foodbasics">Food<br>Basics</div>
+            <div class="store-info"><div class="store-name">Food Basics</div><div class="store-type">Discount grocery</div></div>
+            <div class="store-check"></div>
+          </div>
+          <div class="store-row" onclick="toggleStore(this)">
+            <div class="store-logo store-gt">Giant<br>Tiger</div>
+            <div class="store-info"><div class="store-name">Giant Tiger</div><div class="store-type">Discount retailer</div></div>
+            <div class="store-check"></div>
+          </div>
+          <div class="store-row" onclick="toggleStore(this)">
+            <div class="store-logo store-ig">Indep.<br>Groc.</div>
+            <div class="store-info"><div class="store-name">Independent Grocers</div><div class="store-type">Grocery chain</div></div>
+            <div class="store-check"></div>
+          </div>
+        </div>
+
+        <div class="store-footer">
+          <div class="store-footer-hint" id="store-hint">2 stores selected</div>
+          <button class="btn-primary" id="store-continue-btn" onclick="goTo(4)">Continue</button>
+        </div>
+      </div>
+
+      <!-- S4: NOTIFICATION PERMISSION -->
+      <div class="screen active" id="s4">
+        <div class="perm-content">
+          <div class="perm-icon-wrap">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M24 6C24 6 14 10 14 22V30L10 34V36H38V34L34 30V22C34 10 24 6 24 6Z" stroke="#30d158" stroke-width="2.5" fill="rgba(48,209,88,0.1)" stroke-linejoin="round"></path>
+              <path d="M20 36C20 38.2 21.8 40 24 40C26.2 40 28 38.2 28 36" stroke="#30d158" stroke-width="2.5" stroke-linecap="round"></path>
+              <circle cx="36" cy="12" r="6" fill="#ff453a"></circle>
+              <text x="36" y="16" text-anchor="middle" fill="white" font-size="8" font-weight="700" font-family="Inter">3</text>
+            </svg>
+          </div>
+          <div class="perm-title">Stay ahead of<br>price drops</div>
+          <div class="perm-sub">SmartCart needs permission to send you alerts when your tracked items hit a genuine low.</div>
+
+          <div class="perm-examples">
+            <div class="notif-pill">
+              <div class="notif-pill-icon">🛒</div>
+              <div class="notif-pill-text">
+                <div class="notif-pill-title">Butter at No Frills — 6-month low</div>
+                <div class="notif-pill-body">$4.49 · You usually restock in 2 days</div>
+              </div>
+              <div class="notif-dot" style="top:10px;right:10px;"></div>
+            </div>
+            <div class="notif-pill" style="opacity:0.65;">
+              <div class="notif-pill-icon">🏷️</div>
+              <div class="notif-pill-text">
+                <div class="notif-pill-title">Olive Oil on sale at Metro</div>
+                <div class="notif-pill-body">$8.99 (was $12.49) · Sale ends in 3 days</div>
+              </div>
+            </div>
+            <div class="notif-pill" style="opacity:0.4;">
+              <div class="notif-pill-icon">⏰</div>
+              <div class="notif-pill-text">
+                <div class="notif-pill-title">Last chance — Chicken Breast sale ends tomorrow</div>
+                <div class="notif-pill-body">$8.99/kg at Loblaws</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="perm-actions">
+          <button class="btn-primary" onclick="showSysAlert()">Allow Notifications</button>
+          <button class="btn-ghost" onclick="goTo('home')">Not now</button>
+        </div>
+
+        <!-- System Permission Dialog -->
+        <div class="sys-overlay" id="sys-overlay">
+          <div class="sys-alert">
+            <div class="sys-alert-body">
+              <div class="sys-alert-title">"SmartCart" Would Like to Send You Notifications</div>
+              <div class="sys-alert-msg">Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.</div>
+            </div>
+            <div class="sys-alert-actions">
+              <button class="sys-alert-btn" onclick="dismissSys()">Don't Allow</button>
+              <button class="sys-alert-btn" onclick="allowNotif()">Allow</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const labels = {
+    1: 'Screen 1 — Splash / Launch',
+    2: 'Screen 2 — Onboarding Carousel',
+    3: 'Screen 3 — Store Selection',
+    4: 'Screen 4 — Notification Permission'
+  };
+
+  const navBtns = document.querySelectorAll('.nav-btn');
+  let obSlide = 0;
+
+  function goTo(n) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('s' + n).classList.add('active');
+    navBtns.forEach((b, i) => b.classList.toggle('active', i+1 === n));
+    document.getElementById('screen-label').textContent = labels[n] || '';
+    if (n === 2) { obSlide = 0; updateOb(); }
+  }
+
+  function obNext() {
+    if (obSlide < 2) {
+      obSlide++;
+      updateOb();
+    } else {
+      goTo(3);
+    }
+  }
+
+  function obBack() {
+    if (obSlide > 0) { obSlide--; updateOb(); }
+  }
+
+  function updateOb() {
+    document.getElementById('ob-slides').style.transform = `translateX(-${obSlide * 100}%)`;
+    for (let i=0; i<3; i++) {
+      document.getElementById('dot-'+i).className = 'ob-dot' + (i===obSlide?' active':'');
+    }
+    document.getElementById('ob-next-btn').textContent = obSlide === 2 ? 'Get Started' : 'Next';
+    const backBtn = document.getElementById('ob-back-btn');
+    backBtn.style.display = obSlide > 0 ? 'block' : 'none';
+  }
+
+  let selectedCount = 2;
+  function toggleStore(row) {
+    row.classList.toggle('selected');
+    const check = row.querySelector('.store-check');
+    if (row.classList.contains('selected')) {
+      selectedCount++;
+      check.innerHTML = '<svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4L4.5 7.5L11 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    } else {
+      selectedCount--;
+      check.innerHTML = '';
+    }
+    const hint = document.getElementById('store-hint');
+    hint.textContent = selectedCount === 0 ? 'Select at least 1 store' : `${selectedCount} store${selectedCount===1?'':'s'} selected`;
+    const btn = document.getElementById('store-continue-btn');
+    btn.className = 'btn-primary' + (selectedCount === 0 ? ' disabled' : '');
+  }
+
+  function showSysAlert() {
+    document.getElementById('sys-overlay').classList.add('show');
+  }
+  function dismissSys() {
+    document.getElementById('sys-overlay').classList.remove('show');
+  }
+  function allowNotif() {
+    document.getElementById('sys-overlay').classList.remove('show');
+    setTimeout(() => goTo('home'), 300);
+  }
+
+  // Auto-advance splash
+  setTimeout(() => { if (document.getElementById('s1').classList.contains('active')) goTo(2); }, 2000);
+</script>
+
+
+</body></html><!-- See attached file content: smartcart-batch1-wireframes.html -->
