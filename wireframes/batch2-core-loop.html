@@ -1,1 +1,689 @@
-<!-- See attached file content: smartcart-batch2.html -->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartCart — Batch 2 Wireframes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f7f6f2;--surface:#f9f8f5;--surface2:#fbfbf9;--offset:#f0ede8;--offset2:#e8e4de;
+  --divider:#dcd9d5;--border:#d4d1ca;
+  --text:#28251d;--muted:#7a7974;--faint:#bab9b4;--inverse:#f9f8f4;
+  --primary:#01696f;--primary-h:#0c4e54;--primary-hi:#cedcd8;
+  --success:#437a22;--success-hi:#d4dfcc;
+  --warn:#964219;--warn-hi:#ddcfc6;
+  --error:#a12c7b;--error-hi:#e0ced7;
+  --gold:#d19900;--gold-hi:#e9e0c6;
+  --r-sm:6px;--r-md:10px;--r-lg:14px;--r-xl:18px;--r-full:9999px;
+  --shadow-sm:0 1px 3px rgba(40,37,29,.07);
+  --shadow-md:0 4px 16px rgba(40,37,29,.09);
+  --shadow-lg:0 12px 32px rgba(40,37,29,.13);
+  --font:'Inter',sans-serif;
+}
+body{font-family:var(--font);background:#e0ddd7;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:24px 16px 48px}
+
+/* ── top nav ── */
+.lab-nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:28px}
+.lab-btn{padding:8px 18px;border-radius:var(--r-full);font-size:13px;font-weight:500;font-family:var(--font);cursor:pointer;border:1.5px solid var(--divider);background:white;color:var(--muted);transition:all .18s}
+.lab-btn.active,.lab-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.lab-title{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;text-align:center}
+
+/* ── phone shell ── */
+.phone{width:390px;height:844px;background:var(--surface);border-radius:48px;overflow:hidden;position:relative;box-shadow:0 0 0 10px #1a1a1a,0 32px 80px rgba(0,0,0,.45);flex-shrink:0}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;overflow:hidden;background:var(--bg)}
+.screen.active{display:flex}
+
+/* ── status bar ── */
+.statusbar{height:52px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px 10px;font-size:12px;font-weight:600;color:var(--text)}
+.statusbar .icons{display:flex;gap:5px;align-items:center}
+.statusbar .icons svg{width:16px;height:16px}
+
+/* ── navigation bar ── */
+.navbar{height:82px;background:rgba(249,248,245,.9);backdrop-filter:blur(12px);border-top:1px solid var(--border);flex-shrink:0;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 0 16px;position:relative}
+.nb-tab{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px;border:none;background:none;font-family:var(--font)}
+.nb-tab svg{width:24px;height:24px;stroke:var(--faint);stroke-width:1.8;fill:none;transition:stroke .15s}
+.nb-tab span{font-size:10px;color:var(--faint);font-weight:500;transition:color .15s}
+.nb-tab.active svg{stroke:var(--primary)}
+.nb-tab.active span{color:var(--primary)}
+.nb-dot{position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;background:var(--error)}
+
+/* ── page header ── */
+.page-hd{padding:16px 20px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.page-hd h1{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.3px}
+.icon-btn{width:38px;height:38px;border-radius:var(--r-full);background:var(--offset);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.icon-btn svg{width:20px;height:20px;stroke:var(--text);stroke-width:1.8;fill:none}
+
+/* ── scroll body ── */
+.scroll-body{flex:1;overflow-y:auto;padding:0 16px 8px}
+.scroll-body::-webkit-scrollbar{display:none}
+
+/* ── section label ── */
+.sec-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px}
+
+/* ── alert banner ── */
+.alert-banner{margin:0 0 14px;padding:12px 14px;border-radius:var(--r-lg);background:var(--primary-hi);border:1px solid color-mix(in srgb,var(--primary) 18%,transparent);display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.alert-banner svg{width:18px;height:18px;stroke:var(--primary);stroke-width:2;fill:none;flex-shrink:0;margin-top:1px}
+.alert-banner .ab-body{flex:1}
+.alert-banner .ab-title{font-size:13px;font-weight:600;color:var(--primary)}
+.alert-banner .ab-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.ab-badge{background:var(--primary);color:#fff;font-size:11px;font-weight:700;border-radius:var(--r-full);padding:2px 7px;align-self:center;flex-shrink:0}
+
+/* ── segment tabs ── */
+.seg-tabs{display:flex;background:var(--offset);border-radius:var(--r-lg);padding:3px;margin-bottom:14px;flex-shrink:0;margin:0 16px 14px}
+.seg-tab{flex:1;padding:7px 4px;border-radius:10px;text-align:center;font-size:13px;font-weight:500;color:var(--muted);border:none;background:none;cursor:pointer;font-family:var(--font);transition:all .15s}
+.seg-tab.active{background:white;color:var(--text);font-weight:600;box-shadow:var(--shadow-sm)}
+
+/* ── item card (list) ── */
+.item-card{background:var(--surface);border-radius:var(--r-lg);border:1px solid var(--border);padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;cursor:pointer;transition:box-shadow .15s}
+.item-card:active{box-shadow:var(--shadow-md)}
+.item-thumb{width:44px;height:44px;border-radius:var(--r-md);background:var(--offset);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px}
+.item-info{flex:1;min-width:0}
+.item-name{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item-meta{font-size:12px;color:var(--muted);margin-top:2px}
+.item-price{text-align:right;flex-shrink:0}
+.item-price .cur{font-size:15px;font-weight:700;color:var(--text)}
+.item-price .cur.low{color:var(--success)}
+.item-price .unit{font-size:11px;color:var(--muted)}
+.deal-badge{display:inline-flex;align-items:center;gap:3px;background:var(--success-hi);color:var(--success);font-size:10px;font-weight:700;border-radius:var(--r-full);padding:2px 7px;margin-top:3px}
+.deal-badge svg{width:10px;height:10px;stroke:var(--success);stroke-width:2.5;fill:none}
+.replen-badge{display:inline-flex;align-items:center;gap:3px;background:var(--gold-hi);color:var(--gold);font-size:10px;font-weight:700;border-radius:var(--r-full);padding:2px 7px;margin-top:3px}
+
+/* ── on-sale-now card ── */
+.sale-card{background:var(--surface);border-radius:var(--r-lg);border:1.5px solid color-mix(in srgb,var(--success) 22%,transparent);padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:box-shadow .15s}
+.sale-card:active{box-shadow:var(--shadow-md)}
+.sale-store-chip{font-size:11px;color:var(--success);background:var(--success-hi);border-radius:var(--r-full);padding:2px 8px;font-weight:600;margin-top:3px;display:inline-block}
+.sale-orig{font-size:11px;color:var(--faint);text-decoration:line-through;margin-left:4px}
+.sale-save{font-size:10px;font-weight:700;color:var(--success);background:var(--success-hi);border-radius:var(--r-full);padding:2px 7px;margin-top:3px;display:inline-block}
+
+/* ── FAB ── */
+.fab{position:absolute;right:20px;bottom:96px;width:56px;height:56px;border-radius:var(--r-full);background:var(--primary);border:none;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(1,105,111,.35);cursor:pointer;z-index:10}
+.fab svg{width:26px;height:26px;stroke:#fff;stroke-width:2;fill:none}
+
+/* ── receipt scanner screen ── */
+.camera-frame{flex:1;background:#0d1017;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.camera-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.scan-region{width:320px;height:210px;position:relative}
+.scan-corner{position:absolute;width:28px;height:28px;border-color:white;border-style:solid;border-width:0}
+.scan-corner.tl{top:0;left:0;border-top-width:3px;border-left-width:3px;border-radius:4px 0 0 0}
+.scan-corner.tr{top:0;right:0;border-top-width:3px;border-right-width:3px;border-radius:0 4px 0 0}
+.scan-corner.bl{bottom:0;left:0;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 4px}
+.scan-corner.br{bottom:0;right:0;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 4px 0}
+.scan-line{position:absolute;left:4px;right:4px;height:2px;background:linear-gradient(90deg,transparent,var(--primary),transparent);top:50%;animation:scanmove 2s ease-in-out infinite}
+@keyframes scanmove{0%,100%{top:10%}50%{top:88%}}
+.scan-hint{position:absolute;bottom:0;left:0;right:0;text-align:center;padding-bottom:6px;font-size:12px;color:rgba(255,255,255,.6)}
+.camera-grid{position:absolute;inset:0;opacity:.06;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:40px 40px}
+.cam-receipt-bg{position:absolute;inset:30px 35px;background:rgba(255,255,255,.07);border-radius:4px;display:flex;flex-direction:column;gap:5px;padding:14px 10px}
+.cam-receipt-line{height:6px;background:rgba(255,255,255,.12);border-radius:3px}
+.cam-receipt-line.short{width:55%}
+.cam-receipt-line.med{width:75%}
+
+.scanner-top{flex-shrink:0;background:#0d1017;display:flex;align-items:center;justify-content:space-between;padding:52px 20px 14px}
+.scanner-top .close-btn{width:36px;height:36px;border-radius:var(--r-full);background:rgba(255,255,255,.12);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.scanner-top .close-btn svg{width:18px;height:18px;stroke:#fff;stroke-width:2;fill:none}
+.scanner-top .scan-title{font-size:16px;font-weight:600;color:#fff}
+.scanner-top .store-chip{background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);font-size:12px;border-radius:var(--r-full);padding:5px 12px;border:none;font-family:var(--font);cursor:pointer}
+
+.scanner-bot{flex-shrink:0;background:#0d1017;padding:20px 20px 36px;display:flex;flex-direction:column;gap:16px}
+.shutter-row{display:flex;align-items:center;justify-content:center;gap:36px}
+.shutter-btn{width:70px;height:70px;border-radius:var(--r-full);border:4px solid white;background:white;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.shutter-btn::after{content:'';width:56px;height:56px;border-radius:var(--r-full);background:white;display:block}
+.shutter-side{width:44px;height:44px;border-radius:var(--r-full);background:rgba(255,255,255,.12);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.shutter-side svg{width:22px;height:22px;stroke:#fff;stroke-width:1.8;fill:none}
+.scan-tips{display:flex;gap:8px;justify-content:center}
+.scan-tip{font-size:11px;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:4px}
+.scan-tip svg{width:12px;height:12px;stroke:rgba(255,255,255,.4);stroke-width:2;fill:none}
+
+/* ── processing overlay ── */
+.proc-overlay{position:absolute;inset:0;background:rgba(13,16,23,.82);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:20;backdrop-filter:blur(4px)}
+.proc-spinner{width:48px;height:48px;border:3px solid rgba(255,255,255,.15);border-top-color:var(--primary);border-radius:50%;animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.proc-text{font-size:15px;font-weight:600;color:#fff}
+.proc-sub{font-size:13px;color:rgba(255,255,255,.5)}
+
+/* ── review screen ── */
+.review-store-hd{padding:12px 20px 0;display:flex;align-items:center;gap:10px}
+.store-avatar{width:36px;height:36px;border-radius:var(--r-md);background:var(--offset);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.store-name{font-size:14px;font-weight:600;color:var(--text)}
+.store-date{font-size:12px;color:var(--muted)}
+.review-total-row{padding:10px 20px 14px;display:flex;align-items:baseline;gap:6px}
+.review-total-row .total-label{font-size:13px;color:var(--muted)}
+.review-total-row .total-amt{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.3px}
+
+.review-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface);border-radius:var(--r-md);border:1px solid var(--border);margin-bottom:6px;cursor:pointer}
+.review-item.unmatched{border-color:color-mix(in srgb,var(--warn) 28%,transparent);background:color-mix(in srgb,var(--warn-hi) 40%,var(--surface))}
+.review-chk{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--border);background:white;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.review-chk.checked{background:var(--primary);border-color:var(--primary)}
+.review-chk.checked svg{display:block}
+.review-chk svg{display:none;width:13px;height:13px;stroke:white;stroke-width:2.5;fill:none}
+.review-item-info{flex:1;min-width:0}
+.review-item-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.review-item-cat{font-size:11px;color:var(--muted);margin-top:1px}
+.warn-chip{font-size:10px;font-weight:600;color:var(--warn);background:var(--warn-hi);border-radius:var(--r-full);padding:1px 7px;margin-top:2px;display:inline-block}
+.review-item-price{font-size:14px;font-weight:700;color:var(--text);flex-shrink:0}
+.review-qty{font-size:11px;color:var(--muted);flex-shrink:0}
+
+.confirm-bar{flex-shrink:0;padding:12px 20px 36px;background:rgba(249,248,245,.95);backdrop-filter:blur(10px);border-top:1px solid var(--border)}
+.confirm-summary{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.confirm-summary .cs-label{font-size:12px;color:var(--muted)}
+.confirm-summary .cs-val{font-size:13px;font-weight:600;color:var(--text)}
+.btn-primary{width:100%;padding:15px;border-radius:var(--r-lg);background:var(--primary);color:white;font-size:16px;font-weight:600;border:none;cursor:pointer;font-family:var(--font);letter-spacing:-.1px}
+.btn-primary:active{background:var(--primary-h)}
+.btn-secondary{width:100%;padding:12px;border-radius:var(--r-lg);background:transparent;color:var(--muted);font-size:14px;font-weight:500;border:none;cursor:pointer;font-family:var(--font);margin-top:6px}
+
+/* ── success sheet ── */
+.sheet-overlay{position:absolute;inset:0;background:rgba(20,18,14,.5);z-index:30;display:flex;align-items:flex-end;backdrop-filter:blur(3px)}
+.sheet{width:100%;background:var(--surface);border-radius:28px 28px 0 0;padding:24px 24px 44px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sheet-handle{width:36px;height:4px;background:var(--divider);border-radius:var(--r-full);margin-bottom:4px}
+.sheet-icon{width:56px;height:56px;border-radius:var(--r-full);background:var(--success-hi);display:flex;align-items:center;justify-content:center}
+.sheet-icon svg{width:28px;height:28px;stroke:var(--success);stroke-width:2;fill:none}
+.sheet h2{font-size:19px;font-weight:700;color:var(--text);text-align:center}
+.sheet p{font-size:14px;color:var(--muted);text-align:center;max-width:30ch;line-height:1.5}
+.sheet-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.sheet-pill{background:var(--offset);border-radius:var(--r-full);padding:6px 14px;font-size:12px;font-weight:600;color:var(--text)}
+.sheet-pill.green{background:var(--success-hi);color:var(--success)}
+
+/* ── empty state ── */
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:10px;padding:32px 24px;text-align:center}
+.empty-state .es-icon{width:52px;height:52px;border-radius:var(--r-full);background:var(--offset);display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+.empty-state .es-icon svg{width:26px;height:26px;stroke:var(--faint);stroke-width:1.8;fill:none}
+.empty-state h3{font-size:16px;font-weight:600;color:var(--text)}
+.empty-state p{font-size:13px;color:var(--muted);max-width:28ch;line-height:1.6}
+
+/* ── home screen specific ── */
+.greeting-row{padding:8px 20px 14px;display:flex;align-items:center;justify-content:space-between}
+.greeting-row .g-text h2{font-size:18px;font-weight:700;color:var(--text)}
+.greeting-row .g-text p{font-size:13px;color:var(--muted);margin-top:1px}
+.greeting-row .avatar{width:38px;height:38px;border-radius:var(--r-full);background:var(--primary-hi);border:2px solid var(--primary);display:flex;align-items:center;justify-content:center;font-size:16px}
+
+/* state indicator */
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="lab-title">SmartCart · Batch 2 · Core Loop Wireframes</div>
+<div class="lab-nav">
+  <button class="lab-btn active" onclick="showScreen('home','home-tab')">① Home / Smart List</button>
+  <button class="lab-btn" onclick="showScreen('scanner','scanner-tab')">② Receipt Scanner</button>
+  <button class="lab-btn" onclick="showScreen('review','review-tab')">③ Receipt Review</button>
+  <button class="lab-btn" onclick="showScreen('success','success-tab')">③b Confirm Sheet</button>
+</div>
+
+<div class="phone">
+
+<!-- ══════════════════════════════════════════
+     SCREEN 1 — HOME / SMART LIST
+══════════════════════════════════════════ -->
+<div class="screen active" id="home">
+  <div class="statusbar">
+    <span>9:41</span>
+    <div class="icons">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6l5 5 5-5 5 5 5-5"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="1" y="6" width="4" height="12" rx="1"/><rect x="7" y="4" width="4" height="14" rx="1"/><rect x="13" y="2" width="4" height="16" rx="1"/><rect x="19" y="1" width="4" height="17" rx="1"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-1 10H2L1 7"/><path d="M4 7V4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v3"/></svg>
+    </div>
+  </div>
+
+  <div class="greeting-row">
+    <div class="g-text">
+      <h2>Good evening, Timothy</h2>
+      <p>3 items near replenishment</p>
+    </div>
+    <div class="avatar">🛒</div>
+  </div>
+
+  <!-- alert banner -->
+  <div style="padding:0 16px">
+    <div class="alert-banner" onclick="showScreen('scanner','scanner-tab')">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <div class="ab-body">
+        <div class="ab-title">2 deals active right now</div>
+        <div class="ab-sub">Oats at No Frills · Eggs at Metro</div>
+      </div>
+      <div class="ab-badge">2</div>
+    </div>
+  </div>
+
+  <!-- segment tabs -->
+  <div class="seg-tabs" style="margin-top:4px">
+    <button class="seg-tab active" id="tab-mylist" onclick="switchTab('mylist')">My List</button>
+    <button class="seg-tab" id="tab-onsale" onclick="switchTab('onsale')">On Sale Now</button>
+  </div>
+
+  <!-- MY LIST tab -->
+  <div class="scroll-body" id="panel-mylist">
+    <div class="sec-label">Running Low</div>
+
+    <div class="item-card" onclick="void(0)">
+      <div class="item-thumb">🥛</div>
+      <div class="item-info">
+        <div class="item-name">Natrel Lactose-Free 2%</div>
+        <div class="item-meta">Last bought 11 days ago · Avg every 12d</div>
+        <span class="replen-badge">⏱ Due in 1 day</span>
+      </div>
+      <div class="item-price">
+        <div class="cur">$5.99</div>
+        <div class="unit">Loblaws</div>
+      </div>
+    </div>
+
+    <div class="item-card" onclick="void(0)">
+      <div class="item-thumb">🥚</div>
+      <div class="item-info">
+        <div class="item-name">Free Range Eggs 12pk</div>
+        <div class="item-meta">Last bought 8 days ago · Avg every 10d</div>
+        <span class="deal-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Historical Low</span>
+      </div>
+      <div class="item-price">
+        <div class="cur low">$4.49</div>
+        <div class="unit">Metro · was $5.79</div>
+      </div>
+    </div>
+
+    <div class="item-card" onclick="void(0)">
+      <div class="item-thumb">🌾</div>
+      <div class="item-info">
+        <div class="item-name">Quaker Large Flake Oats</div>
+        <div class="item-meta">Last bought 22 days ago · Avg every 25d</div>
+        <span class="deal-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Historical Low</span>
+      </div>
+      <div class="item-price">
+        <div class="cur low">$5.29</div>
+        <div class="unit">No Frills · was $6.49</div>
+      </div>
+    </div>
+
+    <div class="sec-label" style="margin-top:18px">Tracked Items</div>
+
+    <div class="item-card">
+      <div class="item-thumb">🍞</div>
+      <div class="item-info">
+        <div class="item-name">Wonder Bread White</div>
+        <div class="item-meta">Last bought 5 days ago · Avg every 14d</div>
+      </div>
+      <div class="item-price">
+        <div class="cur">$3.99</div>
+        <div class="unit">Loblaws</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-thumb">🧀</div>
+      <div class="item-info">
+        <div class="item-name">Armstrong Cheddar 400g</div>
+        <div class="item-meta">Last bought 3 days ago · Avg every 18d</div>
+      </div>
+      <div class="item-price">
+        <div class="cur">$7.49</div>
+        <div class="unit">Metro</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-thumb">🍌</div>
+      <div class="item-info">
+        <div class="item-name">Bananas (per bunch)</div>
+        <div class="item-meta">Last bought 7 days ago · Avg every 8d</div>
+      </div>
+      <div class="item-price">
+        <div class="cur">$1.69</div>
+        <div class="unit">/lb · No Frills</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ON SALE NOW tab -->
+  <div class="scroll-body hidden" id="panel-onsale">
+    <div class="sec-label">Your items on sale this week</div>
+
+    <div class="sale-card">
+      <div class="item-thumb">🥚</div>
+      <div class="item-info">
+        <div class="item-name">Free Range Eggs 12pk</div>
+        <span class="sale-store-chip">Metro</span>
+        <span class="sale-orig">$5.79</span>
+        <div style="margin-top:3px">
+          <span class="sale-save">Save $1.30 · Ends Sat</span>
+        </div>
+      </div>
+      <div class="item-price">
+        <div class="cur low">$4.49</div>
+        <div class="unit">sale price</div>
+      </div>
+    </div>
+
+    <div class="sale-card">
+      <div class="item-thumb">🌾</div>
+      <div class="item-info">
+        <div class="item-name">Quaker Large Flake Oats</div>
+        <span class="sale-store-chip">No Frills</span>
+        <span class="sale-orig">$6.49</span>
+        <div style="margin-top:3px">
+          <span class="sale-save">Save $1.20 · Ends Thu</span>
+        </div>
+      </div>
+      <div class="item-price">
+        <div class="cur low">$5.29</div>
+        <div class="unit">sale price</div>
+      </div>
+    </div>
+
+    <div style="height:60px"></div>
+  </div>
+
+  <!-- FAB -->
+  <button class="fab" onclick="showScreen('scanner','scanner-tab')">
+    <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+  </button>
+
+  <!-- bottom nav -->
+  <nav class="navbar">
+    <button class="nb-tab active">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="nb-tab" style="position:relative">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span>Alerts</span>
+      <div class="nb-dot"></div>
+    </button>
+    <button class="nb-tab">
+      <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      <span>History</span>
+    </button>
+    <button class="nb-tab">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <span>Settings</span>
+    </button>
+  </nav>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     SCREEN 2 — RECEIPT SCANNER
+══════════════════════════════════════════ -->
+<div class="screen" id="scanner" style="background:#0d1017">
+
+  <!-- top bar -->
+  <div class="scanner-top">
+    <button class="close-btn" onclick="showScreen('home','home-tab')">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <span class="scan-title">Scan Receipt</span>
+    <button class="store-chip">No Frills ▾</button>
+  </div>
+
+  <!-- camera viewfinder -->
+  <div class="camera-frame">
+    <div class="camera-grid"></div>
+    <!-- simulated receipt behind the overlay -->
+    <div class="cam-receipt-bg">
+      <div class="cam-receipt-line short"></div>
+      <div class="cam-receipt-line med"></div>
+      <div class="cam-receipt-line"></div>
+      <div class="cam-receipt-line short"></div>
+      <div class="cam-receipt-line med"></div>
+      <div class="cam-receipt-line"></div>
+      <div class="cam-receipt-line short"></div>
+      <div class="cam-receipt-line med"></div>
+      <div class="cam-receipt-line short"></div>
+    </div>
+    <div class="camera-overlay">
+      <div class="scan-region">
+        <div class="scan-corner tl"></div>
+        <div class="scan-corner tr"></div>
+        <div class="scan-corner bl"></div>
+        <div class="scan-corner br"></div>
+        <div class="scan-line"></div>
+        <div class="scan-hint">Fit receipt inside frame</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- bottom controls -->
+  <div class="scanner-bot">
+    <div class="shutter-row">
+      <button class="shutter-side">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="3 9 21 9"/><polyline points="9 21 9 9"/></svg>
+      </button>
+      <button class="shutter-btn" onclick="showProcessing()"></button>
+      <button class="shutter-side">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </button>
+    </div>
+    <div class="scan-tips">
+      <span class="scan-tip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Flatten receipt</span>
+      <span class="scan-tip"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg>Good lighting</span>
+      <span class="scan-tip"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>All lines visible</span>
+    </div>
+  </div>
+
+  <!-- processing overlay (hidden by default) -->
+  <div class="proc-overlay hidden" id="proc-overlay">
+    <div class="proc-spinner"></div>
+    <div class="proc-text">Reading your receipt…</div>
+    <div class="proc-sub">This takes just a moment</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     SCREEN 3 — RECEIPT REVIEW
+══════════════════════════════════════════ -->
+<div class="screen" id="review" style="background:var(--bg)">
+  <div class="statusbar">
+    <span>9:41</span>
+    <div class="icons">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6l5 5 5-5 5 5 5-5"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="1" y="6" width="4" height="12" rx="1"/><rect x="7" y="4" width="4" height="14" rx="1"/><rect x="13" y="2" width="4" height="16" rx="1"/><rect x="19" y="1" width="4" height="17" rx="1"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-1 10H2L1 7"/><path d="M4 7V4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v3"/></svg>
+    </div>
+  </div>
+
+  <div class="page-hd" style="padding-bottom:8px">
+    <button class="icon-btn" onclick="showScreen('scanner','scanner-tab')">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <span style="font-size:17px;font-weight:700;color:var(--text)">Review Receipt</span>
+    <button class="icon-btn">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    </button>
+  </div>
+
+  <!-- store + total -->
+  <div class="review-store-hd">
+    <div class="store-avatar">🛒</div>
+    <div>
+      <div class="store-name">No Frills · Kingston ON</div>
+      <div class="store-date">Today, May 7</div>
+    </div>
+  </div>
+  <div class="review-total-row">
+    <span class="total-label">Total</span>
+    <span class="total-amt">$34.17</span>
+    <span style="font-size:12px;color:var(--muted);margin-left:4px">· 8 items</span>
+  </div>
+
+  <!-- unmatched warning -->
+  <div style="padding:0 16px;margin-bottom:6px">
+    <div style="background:var(--warn-hi);border-radius:var(--r-md);padding:9px 12px;display:flex;gap:8px;align-items:center;border:1px solid color-mix(in srgb,var(--warn) 20%,transparent)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#964219" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span style="font-size:12px;color:var(--warn);font-weight:500">1 item couldn't be matched — tap to fix</span>
+    </div>
+  </div>
+
+  <div class="scroll-body">
+    <!-- checked items -->
+    <div class="review-item">
+      <div class="review-chk checked"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="review-item-info">
+        <div class="review-item-name">Quaker Large Flake Oats 1kg</div>
+        <div class="review-item-cat">Breakfast · No Frills</div>
+      </div>
+      <span class="review-qty">×1</span>
+      <div class="review-item-price">$5.29</div>
+    </div>
+
+    <div class="review-item">
+      <div class="review-chk checked"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="review-item-info">
+        <div class="review-item-name">Free Range Eggs 12pk</div>
+        <div class="review-item-cat">Dairy & Eggs · No Frills</div>
+      </div>
+      <span class="review-qty">×1</span>
+      <div class="review-item-price">$4.49</div>
+    </div>
+
+    <div class="review-item">
+      <div class="review-chk checked"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="review-item-info">
+        <div class="review-item-name">Wonder Bread White 675g</div>
+        <div class="review-item-cat">Bakery · No Frills</div>
+      </div>
+      <span class="review-qty">×1</span>
+      <div class="review-item-price">$3.99</div>
+    </div>
+
+    <div class="review-item">
+      <div class="review-chk checked"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="review-item-info">
+        <div class="review-item-name">Bananas</div>
+        <div class="review-item-cat">Produce · No Frills</div>
+      </div>
+      <span class="review-qty">×1</span>
+      <div class="review-item-price">$1.69</div>
+    </div>
+
+    <div class="review-item">
+      <div class="review-chk checked"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="review-item-info">
+        <div class="review-item-name">PC Blue Menu Chicken Broth</div>
+        <div class="review-item-cat">Pantry · No Frills</div>
+      </div>
+      <span class="review-qty">×2</span>
+      <div class="review-item-price">$4.98</div>
+    </div>
+
+    <!-- unmatched item -->
+    <div class="review-item unmatched">
+      <div class="review-chk">
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="#964219" stroke-width="2" fill="none"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </div>
+      <div class="review-item-info">
+        <div class="review-item-name">NRTRL LF 2% 2L</div>
+        <div class="review-item-cat">OCR text · not matched</div>
+        <span class="warn-chip">Needs review</span>
+      </div>
+      <span class="review-qty">×1</span>
+      <div class="review-item-price" style="color:var(--warn)">$5.99</div>
+    </div>
+
+    <div class="review-item">
+      <div class="review-chk checked"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="review-item-info">
+        <div class="review-item-name">Armstrong Cheddar 400g</div>
+        <div class="review-item-cat">Dairy · No Frills</div>
+      </div>
+      <span class="review-qty">×1</span>
+      <div class="review-item-price">$7.74</div>
+    </div>
+  </div>
+
+  <!-- confirm bar -->
+  <div class="confirm-bar">
+    <div class="confirm-summary">
+      <span class="cs-label">7 matched · 1 needs review</span>
+      <span class="cs-val">Prices saved to history ✓</span>
+    </div>
+    <button class="btn-primary" onclick="showScreen('success','success-tab')">Confirm & Save</button>
+    <button class="btn-secondary">Discard scan</button>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     SCREEN 3b — CONFIRM SUCCESS SHEET
+     (overlays on review screen)
+══════════════════════════════════════════ -->
+<div class="screen" id="success" style="background:var(--bg)">
+  <!-- blurred review behind -->
+  <div style="position:absolute;inset:0;filter:blur(2px);opacity:.4;pointer-events:none">
+    <div style="height:52px;background:var(--surface)"></div>
+    <div style="height:50px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:var(--text)">Review Receipt</div>
+    <div style="flex:1;padding:16px;display:flex;flex-direction:column;gap:8px">
+      <div style="height:56px;border-radius:10px;background:var(--surface);border:1px solid var(--border)"></div>
+      <div style="height:56px;border-radius:10px;background:var(--surface);border:1px solid var(--border)"></div>
+      <div style="height:56px;border-radius:10px;background:var(--surface);border:1px solid var(--border)"></div>
+    </div>
+  </div>
+
+  <!-- success sheet -->
+  <div class="sheet-overlay">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2>Receipt saved!</h2>
+      <p>8 items added to your price history</p>
+      <div class="sheet-pills">
+        <span class="sheet-pill green">🏷 2 new deals found</span>
+        <span class="sheet-pill">📦 8 items tracked</span>
+        <span class="sheet-pill">📊 Prices updated</span>
+      </div>
+      <div style="width:100%;background:var(--offset);border-radius:var(--r-md);padding:12px 14px;margin-top:4px">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:500">What happens next</div>
+        <div style="font-size:13px;color:var(--text);line-height:1.6">SmartCart will alert you when <strong>Oats</strong> or <strong>Eggs</strong> hit historical lows again — timed to when you're likely running out.</div>
+      </div>
+      <button class="btn-primary" onclick="showScreen('home','home-tab')" style="margin-top:4px">Back to Smart List</button>
+      <button class="btn-secondary" onclick="showScreen('review','review-tab')">Review items</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /phone -->
+
+<script>
+function showScreen(id, tabId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.lab-btn').forEach(b => b.classList.remove('active'));
+  // match by onclick content
+  document.querySelectorAll('.lab-btn').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'"+id+"'")) {
+      b.classList.add('active');
+    }
+  });
+}
+
+function switchTab(tab) {
+  document.getElementById('panel-mylist').classList.toggle('hidden', tab !== 'mylist');
+  document.getElementById('panel-onsale').classList.toggle('hidden', tab !== 'onsale');
+  document.getElementById('tab-mylist').classList.toggle('active', tab === 'mylist');
+  document.getElementById('tab-onsale').classList.toggle('active', tab === 'onsale');
+}
+
+function showProcessing() {
+  const overlay = document.getElementById('proc-overlay');
+  overlay.classList.remove('hidden');
+  setTimeout(() => {
+    overlay.classList.add('hidden');
+    showScreen('review', 'review-tab');
+  }, 2200);
+}
+
+// checkboxes toggle
+document.querySelectorAll('.review-chk').forEach(chk => {
+  chk.addEventListener('click', () => {
+    chk.classList.toggle('checked');
+    const svg = chk.querySelector('svg');
+    if (svg) svg.style.display = chk.classList.contains('checked') ? 'block' : 'none';
+  });
+});
+</script>
+</body>
+</html>
