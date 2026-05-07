@@ -1,9 +1,14 @@
-// UserStore.swift
+// UserStore.swift — SmartCart/Models/UserStore.swift
+// Join table between user's tracked list and the stores table.
+// Maps to `user_stores`.
+//
+// ⚠️ P2-3 NOTE: This table is currently NOT written during onboarding.
+// Store selection is tracked via user_settings keys ("store_selected_{id}").
+
 import Foundation
 
-struct UserStore: Identifiable, Codable {
+struct UserStore: Identifiable {
     let id: Int64
-    var storeId: Int64
-    var isPrimary: Bool
-    var addedAt: Date
+    let storeID: Int64
+    let addedAt: Date
 }

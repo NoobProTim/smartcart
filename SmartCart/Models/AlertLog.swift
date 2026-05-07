@@ -1,11 +1,15 @@
-// AlertLog.swift
+// AlertLog.swift — SmartCart/Models/AlertLog.swift
+// One fired alert event. Maps to `alert_log`.
+// Written BEFORE calling UNUserNotificationCenter so daily cap and dedup
+// work correctly even when notification permission is denied.
+
 import Foundation
 
-struct AlertLog: Identifiable, Codable {
+struct AlertLog: Identifiable {
     let id: Int64
-    var userItemId: Int64
-    var alertType: String   // A: Historical Low, B: Sale Alert, C: Expiry Reminder
-    var triggeredAt: Date
-    var saleEventId: Int64?
-    var dismissed: Bool
+    let itemID: Int64
+    let alertType: String       // "historical_low" | "sale" | "expiry"
+    let triggerPrice: Double
+    let firedAt: Date
+    let notificationID: String? // "alert-{type}-{itemID}"; nil when permission denied
 }
