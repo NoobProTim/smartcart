@@ -1,1 +1,850 @@
-<!-- See attached file content: smartcart-batch3-wireframes.html -->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>SmartCart — Batch 3 Wireframes</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="light"]{
+  --color-bg:#f7f6f2;--color-surface:#f9f8f5;--color-surface-2:#fbfbf9;
+  --color-surface-offset:#f3f0ec;--color-surface-dynamic:#e6e4df;
+  --color-divider:#dcd9d5;--color-border:#d4d1ca;
+  --color-text:#28251d;--color-text-muted:#7a7974;--color-text-faint:#bab9b4;
+  --color-primary:#01696f;--color-primary-hover:#0c4e54;
+  --color-primary-highlight:#cedcd8;
+  --color-success:#437a22;--color-success-highlight:#d4dfcc;
+  --color-warning:#964219;--color-warning-highlight:#ddcfc6;
+  --color-error:#a12c7b;--color-error-highlight:#e0ced7;
+  --color-notification:#a13544;--color-notification-highlight:#dececb;
+  --color-gold:#d19900;--color-gold-highlight:#e9e0c6;
+  --color-orange:#da7101;
+  --shadow-sm:0 1px 2px oklch(0.2 0.01 80/.06);
+  --shadow-md:0 4px 12px oklch(0.2 0.01 80/.08);
+  --shadow-lg:0 12px 32px oklch(0.2 0.01 80/.14);
+  --radius-sm:0.375rem;--radius-md:0.5rem;--radius-lg:0.75rem;--radius-xl:1rem;--radius-full:9999px;
+  --text-xs:clamp(0.75rem,.7rem + .25vw,.875rem);
+  --text-sm:clamp(0.875rem,.8rem + .35vw,1rem);
+  --text-base:clamp(1rem,.95rem + .25vw,1.125rem);
+  --text-lg:clamp(1.125rem,1rem + .75vw,1.5rem);
+  --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+  --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;
+  --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;
+}
+[data-theme="dark"]{
+  --color-bg:#171614;--color-surface:#1c1b19;--color-surface-2:#201f1d;
+  --color-surface-offset:#1d1c1a;--color-surface-dynamic:#2d2c2a;
+  --color-divider:#262523;--color-border:#393836;
+  --color-text:#cdccca;--color-text-muted:#797876;--color-text-faint:#5a5957;
+  --color-primary:#4f98a3;--color-primary-hover:#227f8b;--color-primary-highlight:#313b3b;
+  --color-success:#6daa45;--color-success-highlight:#3a4435;
+  --color-warning:#bb653b;--color-warning-highlight:#564942;
+  --color-error:#d163a7;--color-error-highlight:#4c3d46;
+  --color-notification:#dd6974;--color-notification-highlight:#574848;
+  --color-gold:#e8af34;--color-gold-highlight:#4d4332;
+  --color-orange:#fdab43;
+  --shadow-sm:0 1px 2px oklch(0 0 0/.2);--shadow-md:0 4px 12px oklch(0 0 0/.3);--shadow-lg:0 12px 32px oklch(0 0 0/.45);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:none;text-size-adjust:none;-webkit-font-smoothing:antialiased}
+body{font-family:'Satoshi',sans-serif;background:var(--color-bg);color:var(--color-text);font-size:var(--text-sm);min-height:100vh;transition:background .2s,color .2s}
+button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+svg{display:block}
+
+/* ─── SHELL ─── */
+.shell{max-width:440px;margin:0 auto;padding:var(--space-4) var(--space-4) var(--space-8)}
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) 0 var(--space-6)}
+.top-bar h2{font-size:var(--text-base);font-weight:600;color:var(--color-text-muted)}
+.top-bar-tabs{display:flex;gap:var(--space-2)}
+.tab-pill{padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:600;background:var(--color-surface-offset);color:var(--color-text-muted);border:1.5px solid transparent;cursor:pointer;transition:all .18s}
+.tab-pill.active{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}
+.theme-btn{width:36px;height:36px;border-radius:var(--radius-full);background:var(--color-surface-offset);display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);font-size:16px}
+
+/* ─── PHONE FRAME ─── */
+.phone{background:var(--color-surface);border-radius:2.5rem;border:2px solid var(--color-border);overflow:hidden;box-shadow:var(--shadow-lg);position:relative;width:100%;aspect-ratio:9/19.5;display:flex;flex-direction:column}
+.phone-notch{height:32px;background:var(--color-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.notch-pill{width:80px;height:10px;background:var(--color-border);border-radius:var(--radius-full)}
+.phone-scroll{flex:1;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none}
+.phone-scroll::-webkit-scrollbar{display:none}
+
+/* ─── STATUS BAR ─── */
+.status-bar{display:flex;align-items:center;justify-content:space-between;padding:var(--space-2) var(--space-4);font-size:10px;font-weight:600;color:var(--color-text-muted);flex-shrink:0}
+
+/* ─── NAV HEADER ─── */
+.nav-header{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4) var(--space-2);}
+.back-btn{width:32px;height:32px;border-radius:var(--radius-full);background:var(--color-surface-offset);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-title{font-size:var(--text-base);font-weight:700;flex:1}
+.nav-action{width:32px;height:32px;border-radius:var(--radius-full);background:var(--color-surface-offset);display:flex;align-items:center;justify-content:center;color:var(--color-text-muted)}
+
+/* ─── HERO PRODUCT ─── */
+.product-hero{padding:var(--space-4) var(--space-4) 0;display:flex;align-items:flex-start;gap:var(--space-4)}
+.product-icon-lg{width:72px;height:72px;border-radius:var(--radius-xl);background:var(--color-surface-offset);display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;border:1px solid var(--color-border)}
+.product-meta{flex:1}
+.product-name{font-size:var(--text-lg);font-weight:700;line-height:1.2;margin-bottom:var(--space-1)}
+.product-brand{font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-2)}
+.product-tags{display:flex;flex-wrap:wrap;gap:var(--space-1)}
+.tag{padding:2px 8px;border-radius:var(--radius-full);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.tag-primary{background:var(--color-primary-highlight);color:var(--color-primary)}
+.tag-success{background:var(--color-success-highlight);color:var(--color-success)}
+.tag-gold{background:var(--color-gold-highlight);color:var(--color-gold)}
+.tag-warning{background:var(--color-warning-highlight);color:var(--color-warning)}
+.tag-notification{background:var(--color-notification-highlight);color:var(--color-notification)}
+
+/* ─── PRICE BANNER ─── */
+.price-banner{margin:var(--space-4) var(--space-4) 0;padding:var(--space-4);background:var(--color-surface-offset);border-radius:var(--radius-xl);border:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between}
+.price-main{display:flex;align-items:baseline;gap:var(--space-2)}
+.price-current{font-size:var(--text-xl);font-weight:800;color:var(--color-primary);font-variant-numeric:tabular-nums}
+.price-was{font-size:var(--text-xs);color:var(--color-text-muted);text-decoration:line-through}
+.price-badge{background:var(--color-notification);color:#fff;padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:700}
+.price-right{text-align:right}
+.price-alert-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--color-text-faint);margin-bottom:2px}
+.price-personal-low{font-size:var(--text-sm);font-weight:700;color:var(--color-success)}
+
+/* ─── SECTION HEADING ─── */
+.section-heading{font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-faint);padding:var(--space-5) var(--space-4) var(--space-2)}
+
+/* ─── PRICE CHART ─── */
+.chart-wrap{margin:0 var(--space-4);background:var(--color-surface-2);border-radius:var(--radius-xl);border:1px solid var(--color-border);padding:var(--space-4)}
+.chart-range-btns{display:flex;gap:var(--space-1);margin-bottom:var(--space-4)}
+.range-btn{padding:3px 10px;border-radius:var(--radius-full);font-size:10px;font-weight:600;background:transparent;color:var(--color-text-muted);cursor:pointer;transition:all .15s}
+.range-btn.active{background:var(--color-primary);color:#fff}
+.chart-svg-wrap{width:100%;position:relative;height:120px}
+.chart-svg-wrap svg{width:100%;height:100%}
+.chart-legend{display:flex;gap:var(--space-4);margin-top:var(--space-3)}
+.legend-item{display:flex;align-items:center;gap:var(--space-1);font-size:10px;color:var(--color-text-muted)}
+.legend-dot{width:8px;height:8px;border-radius:var(--radius-full);flex-shrink:0}
+
+/* ─── INSIGHT CARDS ─── */
+.insight-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2);margin:var(--space-2) var(--space-4) 0}
+.insight-card{background:var(--color-surface-offset);border-radius:var(--radius-lg);padding:var(--space-3);border:1px solid var(--color-border)}
+.insight-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--color-text-faint);margin-bottom:var(--space-1)}
+.insight-value{font-size:var(--text-base);font-weight:700;color:var(--color-text);font-variant-numeric:tabular-nums}
+.insight-sub{font-size:10px;color:var(--color-text-muted);margin-top:2px}
+.insight-trend-up{color:var(--color-notification)}
+.insight-trend-down{color:var(--color-success)}
+
+/* ─── REPLENISHMENT ─── */
+.replen-card{margin:var(--space-2) var(--space-4) 0;background:var(--color-surface-offset);border-radius:var(--radius-xl);border:1px solid var(--color-border);padding:var(--space-4)}
+.replen-row{display:flex;align-items:center;justify-content:space-between}
+.replen-label{font-size:var(--text-xs);color:var(--color-text-muted);font-weight:500}
+.replen-value{font-size:var(--text-sm);font-weight:700;color:var(--color-text)}
+.replen-bar-bg{height:6px;background:var(--color-surface-dynamic);border-radius:var(--radius-full);margin:var(--space-2) 0;overflow:hidden}
+.replen-bar-fill{height:100%;background:var(--color-primary);border-radius:var(--radius-full)}
+
+/* ─── STORE PRICE LIST ─── */
+.store-list{margin:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-2)}
+.store-row{background:var(--color-surface-2);border-radius:var(--radius-lg);border:1px solid var(--color-border);padding:var(--space-3) var(--space-4);display:flex;align-items:center;justify-content:space-between}
+.store-info{display:flex;align-items:center;gap:var(--space-3)}
+.store-dot{width:10px;height:10px;border-radius:var(--radius-full);flex-shrink:0}
+.store-name{font-size:var(--text-sm);font-weight:600}
+.store-since{font-size:10px;color:var(--color-text-muted)}
+.store-price{font-size:var(--text-base);font-weight:700;font-variant-numeric:tabular-nums}
+.store-price.best{color:var(--color-primary)}
+.best-badge{font-size:9px;font-weight:700;background:var(--color-primary-highlight);color:var(--color-primary);padding:1px 6px;border-radius:var(--radius-full)}
+
+/* ─── HISTORY ENTRIES ─── */
+.history-list{margin:0 var(--space-4);display:flex;flex-direction:column;gap:0}
+.history-row{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px solid var(--color-divider)}
+.history-row:last-child{border-bottom:none}
+.history-icon{width:32px;height:32px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.history-detail{flex:1}
+.history-store{font-size:var(--text-xs);font-weight:600;color:var(--color-text)}
+.history-date{font-size:10px;color:var(--color-text-muted)}
+.history-price{font-size:var(--text-sm);font-weight:700;font-variant-numeric:tabular-nums}
+
+/* ─── STICKY CTA ─── */
+.sticky-cta{padding:var(--space-4);border-top:1px solid var(--color-divider);background:var(--color-surface);flex-shrink:0}
+.btn-primary-full{width:100%;padding:var(--space-4);background:var(--color-primary);color:#fff;border-radius:var(--radius-xl);font-size:var(--text-sm);font-weight:700;text-align:center;display:flex;align-items:center;justify-content:center;gap:var(--space-2);cursor:pointer;border:none;font-family:inherit;transition:background .15s}
+.btn-primary-full:hover{background:var(--color-primary-hover)}
+.btn-ghost-full{width:100%;padding:var(--space-3);background:transparent;color:var(--color-text-muted);border-radius:var(--radius-xl);font-size:var(--text-xs);font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center;gap:var(--space-2);cursor:pointer;border:1px solid var(--color-border);margin-top:var(--space-2);font-family:inherit;transition:all .15s}
+
+/* ─── ALERT SHEET SCREEN ─── */
+.alert-list{margin:0 var(--space-4);display:flex;flex-direction:column;gap:var(--space-3)}
+.alert-card{background:var(--color-surface-2);border-radius:var(--radius-xl);border:1px solid var(--color-border);overflow:hidden;cursor:pointer;transition:box-shadow .15s}
+.alert-card:hover{box-shadow:var(--shadow-md)}
+.alert-card-header{padding:var(--space-3) var(--space-4);display:flex;align-items:center;gap:var(--space-3)}
+.alert-card-icon{width:44px;height:44px;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.alert-card-icon.on-sale{background:var(--color-notification-highlight)}
+.alert-card-icon.low-stock{background:var(--color-gold-highlight)}
+.alert-card-icon.replen{background:var(--color-primary-highlight)}
+.alert-card-info{flex:1}
+.alert-card-title{font-size:var(--text-sm);font-weight:700;color:var(--color-text);margin-bottom:2px}
+.alert-card-sub{font-size:var(--text-xs);color:var(--color-text-muted)}
+.alert-card-badge{padding:3px 10px;border-radius:var(--radius-full);font-size:10px;font-weight:700}
+.alert-card-badge.urgent{background:var(--color-notification-highlight);color:var(--color-notification)}
+.alert-card-badge.good{background:var(--color-success-highlight);color:var(--color-success)}
+.alert-card-badge.new{background:var(--color-primary-highlight);color:var(--color-primary)}
+.alert-divider{height:1px;background:var(--color-divider);margin:0 var(--space-4)}
+.alert-deal-row{padding:var(--space-3) var(--space-4);display:flex;align-items:center;justify-content:space-between}
+.alert-deal-label{font-size:var(--text-xs);color:var(--color-text-muted);font-weight:500}
+.alert-deal-value{font-size:var(--text-sm);font-weight:700;font-variant-numeric:tabular-nums}
+.alert-deal-value.green{color:var(--color-success)}
+.alert-deal-value.red{color:var(--color-notification)}
+.alert-deal-value.blue{color:var(--color-primary)}
+.alert-cta-row{padding:var(--space-2) var(--space-4) var(--space-4);display:flex;gap:var(--space-2)}
+.btn-sm-outline{flex:1;padding:var(--space-2) var(--space-3);border:1.5px solid var(--color-border);border-radius:var(--radius-lg);font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);text-align:center;cursor:pointer;transition:all .15s;font-family:inherit;background:transparent}
+.btn-sm-primary{flex:1;padding:var(--space-2) var(--space-3);background:var(--color-primary);border:1.5px solid var(--color-primary);border-radius:var(--radius-lg);font-size:var(--text-xs);font-weight:700;color:#fff;text-align:center;cursor:pointer;transition:background .15s;font-family:inherit}
+
+/* ─── ALERT SETTINGS ─── */
+.settings-section{margin:0 var(--space-4);display:flex;flex-direction:column;gap:0;background:var(--color-surface-2);border-radius:var(--radius-xl);border:1px solid var(--color-border);overflow:hidden}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:var(--space-4);border-bottom:1px solid var(--color-divider)}
+.settings-row:last-child{border-bottom:none}
+.settings-row-left{display:flex;align-items:center;gap:var(--space-3)}
+.settings-row-icon{width:32px;height:32px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:16px;background:var(--color-surface-offset)}
+.settings-row-label{font-size:var(--text-sm);font-weight:600;color:var(--color-text)}
+.settings-row-sub{font-size:10px;color:var(--color-text-muted);margin-top:1px}
+.toggle{width:42px;height:24px;border-radius:var(--radius-full);background:var(--color-surface-dynamic);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
+.toggle.on{background:var(--color-primary)}
+.toggle-knob{width:18px;height:18px;border-radius:var(--radius-full);background:#fff;position:absolute;top:3px;left:3px;transition:transform .2s;box-shadow:var(--shadow-sm)}
+.toggle.on .toggle-knob{transform:translateX(18px)}
+
+/* ─── EMPTY / FILTER ROW ─── */
+.filter-row{margin:0 var(--space-4);display:flex;gap:var(--space-2);overflow-x:auto;padding-bottom:var(--space-1);scrollbar-width:none}
+.filter-row::-webkit-scrollbar{display:none}
+.filter-chip{padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:600;white-space:nowrap;background:var(--color-surface-offset);color:var(--color-text-muted);border:1.5px solid transparent;cursor:pointer;transition:all .15s}
+.filter-chip.active{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}
+
+/* ─── MODAL OVERLAY ─── */
+.modal-overlay{position:absolute;inset:0;background:oklch(0.1 0 0 /.6);display:flex;flex-direction:column;justify-content:flex-end;z-index:50;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-overlay.visible{opacity:1;pointer-events:all}
+.bottom-sheet{background:var(--color-surface);border-radius:2rem 2rem 0 0;padding:var(--space-4);transform:translateY(100%);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.modal-overlay.visible .bottom-sheet{transform:translateY(0)}
+.sheet-handle{width:40px;height:4px;background:var(--color-border);border-radius:var(--radius-full);margin:0 auto var(--space-4)}
+.sheet-title{font-size:var(--text-base);font-weight:700;margin-bottom:var(--space-1)}
+.sheet-sub{font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-4)}
+.sheet-option-list{display:flex;flex-direction:column;gap:var(--space-2);margin-bottom:var(--space-4)}
+.sheet-option{padding:var(--space-3) var(--space-4);background:var(--color-surface-offset);border-radius:var(--radius-lg);border:1.5px solid transparent;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .15s}
+.sheet-option.selected{border-color:var(--color-primary);background:var(--color-primary-highlight)}
+.sheet-option-left{display:flex;align-items:center;gap:var(--space-3)}
+.sheet-option-icon{font-size:18px}
+.sheet-option-text{font-size:var(--text-sm);font-weight:600}
+.sheet-option-sub{font-size:10px;color:var(--color-text-muted)}
+.checkmark{width:20px;height:20px;border-radius:var(--radius-full);border:2px solid var(--color-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.sheet-option.selected .checkmark{background:var(--color-primary);border-color:var(--color-primary)}
+
+/* ─── BOTTOM NAV ─── */
+.bottom-nav{display:flex;align-items:center;justify-content:space-around;padding:var(--space-2) var(--space-4);border-top:1px solid var(--color-divider);background:var(--color-surface);flex-shrink:0}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:var(--space-2);min-width:44px;color:var(--color-text-faint);cursor:pointer;position:relative}
+.nav-item.active{color:var(--color-primary)}
+.nav-item span{font-size:10px;font-weight:600}
+.nav-badge{position:absolute;top:4px;right:10px;width:8px;height:8px;background:var(--color-notification);border-radius:var(--radius-full);border:2px solid var(--color-surface)}
+
+/* ─── SCREEN VISIBILITY ─── */
+.screen{display:none;flex-direction:column;height:100%}
+.screen.active{display:flex}
+
+/* ─── ANNOTATION ─── */
+.annotation{background:var(--color-gold-highlight);border:1px dashed var(--color-gold);border-radius:var(--radius-md);padding:var(--space-2) var(--space-3);margin:var(--space-2) var(--space-4) 0;display:flex;gap:var(--space-2);align-items:flex-start}
+.annotation svg{flex-shrink:0;color:var(--color-gold);margin-top:1px}
+.annotation p{font-size:10px;color:var(--color-warning);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div>
+      <div style="font-size:var(--text-xs);color:var(--color-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em">SmartCart · Batch 3</div>
+      <div style="font-size:var(--text-lg);font-weight:800">Intelligence Layer</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:var(--space-2)">
+      <div class="top-bar-tabs">
+        <button class="tab-pill active" onclick="showScreen('screen-detail')">Screen 7</button>
+        <button class="tab-pill" onclick="showScreen('screen-alerts')">Screen 8</button>
+      </div>
+      <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
+    </div>
+  </div>
+
+  <!-- PHONE FRAME -->
+  <div class="phone" id="phone">
+    <div class="phone-notch"><div class="notch-pill"></div></div>
+
+    <!-- ════════════════════════════════════
+         SCREEN 7 — ITEM DETAIL
+    ════════════════════════════════════ -->
+    <div class="screen active" id="screen-detail">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>●●●●○ WiFi ▮▮▮</span>
+      </div>
+      <div class="nav-header">
+        <button class="back-btn" onclick="showScreen('screen-alerts')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="nav-title">Item Detail</div>
+        <button class="nav-action" onclick="openAlertSheet()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </button>
+      </div>
+
+      <div class="phone-scroll">
+        <!-- Product Hero -->
+        <div class="product-hero">
+          <div class="product-icon-lg">🥛</div>
+          <div class="product-meta">
+            <div class="product-name">Organic 2% Milk</div>
+            <div class="product-brand">Natrel · 2L</div>
+            <div class="product-tags">
+              <span class="tag tag-notification">📉 All-Time Low</span>
+              <span class="tag tag-success">✓ In Season</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Price Banner -->
+        <div class="price-banner">
+          <div>
+            <div class="price-main">
+              <span class="price-current">$4.29</span>
+              <span class="price-was">$5.49</span>
+            </div>
+            <div style="font-size:10px;color:var(--color-text-muted);margin-top:2px">@ Metro · expires Sun</div>
+          </div>
+          <div class="price-right">
+            <div class="price-alert-label">Your Low</div>
+            <div class="price-personal-low">↓ $4.29 ✓</div>
+            <div class="price-badge">−22%</div>
+          </div>
+        </div>
+
+        <div class="annotation">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          <p><strong>Review note:</strong> "Your Low" = lowest price in user's own purchase history. "All-Time Low" badge only shows when current price ≤ personal low. Consider separate "Market Low" label?</p>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="section-heading">Price History — 90 Days</div>
+        <div class="chart-wrap">
+          <div class="chart-range-btns">
+            <button class="range-btn active">30d</button>
+            <button class="range-btn" onclick="switchRange(this)">90d</button>
+            <button class="range-btn" onclick="switchRange(this)">1yr</button>
+            <button class="range-btn" onclick="switchRange(this)">All</button>
+          </div>
+          <div class="chart-svg-wrap">
+            <svg viewBox="0 0 300 120" preserveAspectRatio="none">
+              <!-- Grid lines -->
+              <line x1="0" y1="30" x2="300" y2="30" stroke="var(--color-divider)" stroke-width="1"/>
+              <line x1="0" y1="60" x2="300" y2="60" stroke="var(--color-divider)" stroke-width="1"/>
+              <line x1="0" y1="90" x2="300" y2="90" stroke="var(--color-divider)" stroke-width="1"/>
+              <!-- Y labels -->
+              <text x="0" y="28" font-size="8" fill="var(--color-text-faint)" font-family="Satoshi,sans-serif">$6</text>
+              <text x="0" y="58" font-size="8" fill="var(--color-text-faint)" font-family="Satoshi,sans-serif">$5</text>
+              <text x="0" y="88" font-size="8" fill="var(--color-text-faint)" font-family="Satoshi,sans-serif">$4</text>
+              <!-- Area fill -->
+              <defs>
+                <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.18"/>
+                  <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0.02"/>
+                </linearGradient>
+              </defs>
+              <path d="M14,65 L35,62 L55,70 L75,55 L95,72 L115,68 L135,58 L155,72 L175,64 L195,60 L215,75 L235,68 L255,62 L270,95 L275,95 L275,110 L14,110 Z"
+                fill="url(#areaGrad)"/>
+              <!-- Price line -->
+              <polyline points="14,65 35,62 55,70 75,55 95,72 115,68 135,58 155,72 175,64 195,60 215,75 235,68 255,62 270,95"
+                fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linejoin="round"/>
+              <!-- Personal avg dashed line -->
+              <line x1="14" y1="58" x2="270" y2="58" stroke="var(--color-text-faint)" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <!-- Current price dot -->
+              <circle cx="270" cy="95" r="5" fill="var(--color-notification)" stroke="var(--color-surface-2)" stroke-width="2"/>
+              <!-- Sale event dots -->
+              <circle cx="75" cy="55" r="3.5" fill="var(--color-success)" stroke="var(--color-surface-2)" stroke-width="1.5"/>
+              <circle cx="135" cy="58" r="3.5" fill="var(--color-success)" stroke="var(--color-surface-2)" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-primary)"></div>Retail price</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-text-faint);opacity:.7"></div>Your avg paid</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-success)"></div>Sale events</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--color-notification)"></div>Now</div>
+          </div>
+        </div>
+
+        <!-- Insight Cards -->
+        <div class="section-heading">Smart Insights</div>
+        <div class="insight-row">
+          <div class="insight-card">
+            <div class="insight-label">Avg Cycle</div>
+            <div class="insight-value">11 days</div>
+            <div class="insight-sub">Based on 8 receipts</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-label">You Usually Pay</div>
+            <div class="insight-value">$5.12</div>
+            <div class="insight-sub insight-trend-down">↓ $0.83 today</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-label">Sale Frequency</div>
+            <div class="insight-value">~3×/mo</div>
+            <div class="insight-sub">Avg 4 days/sale</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-label">Stock Up Qty</div>
+            <div class="insight-value">2 units</div>
+            <div class="insight-sub">Before next cycle</div>
+          </div>
+        </div>
+
+        <!-- Replenishment -->
+        <div class="section-heading">Replenishment</div>
+        <div class="replen-card">
+          <div class="replen-row">
+            <span class="replen-label">Last purchased</span>
+            <span class="replen-value">8 days ago</span>
+          </div>
+          <div class="replen-bar-bg" style="margin:var(--space-3) 0 var(--space-1)">
+            <div class="replen-bar-fill" style="width:73%"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--color-text-faint)">
+            <span>Purchased</span><span>~3 days left</span><span>Reorder</span>
+          </div>
+          <div class="replen-row" style="margin-top:var(--space-3);padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+            <span class="replen-label">🔔 Alert set for</span>
+            <span class="replen-value" style="color:var(--color-primary)">Day 10 · 3 days out</span>
+          </div>
+        </div>
+
+        <div class="annotation">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          <p><strong>Review note:</strong> Replenishment bar shows estimated consumption progress. Should % come from receipt frequency, user-set quantity, or both? Tap "Day 10" to see alert config?</p>
+        </div>
+
+        <!-- Price at Stores -->
+        <div class="section-heading">Current Prices Nearby</div>
+        <div class="store-list">
+          <div class="store-row">
+            <div class="store-info">
+              <div class="store-dot" style="background:var(--color-notification)"></div>
+              <div>
+                <div class="store-name">Metro</div>
+                <div class="store-since">Updated 2h ago <span class="best-badge">BEST</span></div>
+              </div>
+            </div>
+            <span class="store-price best">$4.29</span>
+          </div>
+          <div class="store-row">
+            <div class="store-info">
+              <div class="store-dot" style="background:var(--color-primary)"></div>
+              <div>
+                <div class="store-name">Loblaws</div>
+                <div class="store-since">Updated 4h ago</div>
+              </div>
+            </div>
+            <span class="store-price">$5.49</span>
+          </div>
+          <div class="store-row">
+            <div class="store-info">
+              <div class="store-dot" style="background:var(--color-gold)"></div>
+              <div>
+                <div class="store-name">No Frills</div>
+                <div class="store-since">Updated 1d ago</div>
+              </div>
+            </div>
+            <span class="store-price">$4.99</span>
+          </div>
+          <div class="store-row">
+            <div class="store-info">
+              <div class="store-dot" style="background:var(--color-text-faint)"></div>
+              <div>
+                <div class="store-name">Walmart</div>
+                <div class="store-since">Updated 6h ago</div>
+              </div>
+            </div>
+            <span class="store-price">$5.19</span>
+          </div>
+        </div>
+
+        <!-- Purchase History -->
+        <div class="section-heading">Your Purchase History</div>
+        <div class="history-list">
+          <div class="history-row">
+            <div class="history-icon" style="background:var(--color-success-highlight)">🧾</div>
+            <div class="history-detail">
+              <div class="history-store">Metro · Receipt #14</div>
+              <div class="history-date">Apr 29, 2026</div>
+            </div>
+            <span class="history-price">$5.49</span>
+          </div>
+          <div class="history-row">
+            <div class="history-icon" style="background:var(--color-primary-highlight)">🧾</div>
+            <div class="history-detail">
+              <div class="history-store">Loblaws · Receipt #12</div>
+              <div class="history-date">Apr 18, 2026</div>
+            </div>
+            <span class="history-price">$5.19</span>
+          </div>
+          <div class="history-row">
+            <div class="history-icon" style="background:var(--color-notification-highlight)">🧾</div>
+            <div class="history-detail">
+              <div class="history-store">Metro · Receipt #10</div>
+              <div class="history-date">Apr 7, 2026</div>
+            </div>
+            <span class="history-price" style="color:var(--color-success)">$4.49 ↓</span>
+          </div>
+          <div class="history-row">
+            <div class="history-icon" style="background:var(--color-gold-highlight)">🧾</div>
+            <div class="history-detail">
+              <div class="history-store">No Frills · Receipt #8</div>
+              <div class="history-date">Mar 27, 2026</div>
+            </div>
+            <span class="history-price">$4.99</span>
+          </div>
+        </div>
+        <div style="height:var(--space-8)"></div>
+      </div>
+
+      <!-- Sticky CTA -->
+      <div class="sticky-cta">
+        <button class="btn-primary-full" onclick="openAlertSheet()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+          Set Price Alert
+        </button>
+        <button class="btn-ghost-full">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          Add to Shopping List
+        </button>
+      </div>
+
+      <!-- Bottom Nav -->
+      <div class="bottom-nav">
+        <div class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Home</span></div>
+        <div class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg><span>Receipts</span></div>
+        <div class="nav-item active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zM12 8v4l3 3"/></svg><span>Prices</span></div>
+        <div class="nav-item" onclick="showScreen('screen-alerts')"><div style="position:relative"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg><div class="nav-badge"></div></div><span>Alerts</span></div>
+        <div class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg><span>Profile</span></div>
+      </div>
+
+      <!-- Alert Sheet Modal -->
+      <div class="modal-overlay" id="alert-sheet" onclick="closeAlertSheet(event)">
+        <div class="bottom-sheet" onclick="event.stopPropagation()">
+          <div class="sheet-handle"></div>
+          <div class="sheet-title">🔔 Set Alert — Organic 2% Milk</div>
+          <div class="sheet-sub">You'll be notified when this item hits your target conditions.</div>
+          <div class="sheet-option-list">
+            <div class="sheet-option selected" onclick="selectOption(this)">
+              <div class="sheet-option-left">
+                <span class="sheet-option-icon">📉</span>
+                <div>
+                  <div class="sheet-option-text">Price Drop Alert</div>
+                  <div class="sheet-option-sub">Notify when below $4.50</div>
+                </div>
+              </div>
+              <div class="checkmark"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+            </div>
+            <div class="sheet-option" onclick="selectOption(this)">
+              <div class="sheet-option-left">
+                <span class="sheet-option-icon">🔄</span>
+                <div>
+                  <div class="sheet-option-text">Replenishment + Sale</div>
+                  <div class="sheet-option-sub">Alert when you need it AND it's on sale</div>
+                </div>
+              </div>
+              <div class="checkmark"></div>
+            </div>
+            <div class="sheet-option" onclick="selectOption(this)">
+              <div class="sheet-option-left">
+                <span class="sheet-option-icon">🏷️</span>
+                <div>
+                  <div class="sheet-option-text">Any Sale Event</div>
+                  <div class="sheet-option-sub">Notify on any discounted price</div>
+                </div>
+              </div>
+              <div class="checkmark"></div>
+            </div>
+          </div>
+          <button class="btn-primary-full" onclick="closeAlertSheet()">Save Alert</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         SCREEN 8 — ALERTS / DEAL SHEET
+    ════════════════════════════════════ -->
+    <div class="screen" id="screen-alerts">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>●●●●○ WiFi ▮▮▮</span>
+      </div>
+      <div style="padding:var(--space-3) var(--space-4) var(--space-1)">
+        <div style="font-size:var(--text-xs);color:var(--color-text-muted);font-weight:600">Thursday, May 7</div>
+        <div style="font-size:var(--text-lg);font-weight:800">Alerts & Deals</div>
+      </div>
+
+      <!-- Summary Banner -->
+      <div style="margin:var(--space-2) var(--space-4) var(--space-3);background:var(--color-primary-highlight);border-radius:var(--radius-xl);padding:var(--space-3) var(--space-4);display:flex;align-items:center;gap:var(--space-3);border:1px solid var(--color-primary)" >
+        <div style="font-size:24px">🎯</div>
+        <div style="flex:1">
+          <div style="font-size:var(--text-sm);font-weight:700;color:var(--color-primary)">3 genuine deals right now</div>
+          <div style="font-size:10px;color:var(--color-primary);opacity:.75">All timed to your replenishment cycles</div>
+        </div>
+        <div style="font-size:var(--text-xl);font-weight:800;color:var(--color-primary)">$7.40</div>
+      </div>
+      <div style="padding:0 var(--space-4);font-size:10px;color:var(--color-text-muted);margin-bottom:var(--space-2)">↑ Potential savings this week</div>
+
+      <!-- Filter Row -->
+      <div class="filter-row" style="margin-bottom:var(--space-3)">
+        <button class="filter-chip active">All (5)</button>
+        <button class="filter-chip" onclick="switchFilter(this)">🔥 On Sale (3)</button>
+        <button class="filter-chip" onclick="switchFilter(this)">🔔 Running Low (1)</button>
+        <button class="filter-chip" onclick="switchFilter(this)">📌 Watching (4)</button>
+      </div>
+
+      <div class="phone-scroll">
+        <!-- Alert Cards -->
+        <div class="alert-list">
+
+          <!-- Card 1 — On Sale + At Low -->
+          <div class="alert-card" onclick="showScreen('screen-detail')">
+            <div class="alert-card-header">
+              <div class="alert-card-icon on-sale">🥛</div>
+              <div class="alert-card-info">
+                <div class="alert-card-title">Organic 2% Milk · 2L</div>
+                <div class="alert-card-sub">Metro · Expires Sunday</div>
+              </div>
+              <span class="alert-card-badge urgent">ALL-TIME LOW</span>
+            </div>
+            <div class="alert-divider"></div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">Current</span>
+              <span class="alert-deal-value red">$4.29 <span style="font-size:10px;opacity:.7">(was $5.49)</span></span>
+            </div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">You save</span>
+              <span class="alert-deal-value green">$1.20 · −22%</span>
+            </div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">Replenishment</span>
+              <span class="alert-deal-value blue">Due in ~3 days ✓ Good timing</span>
+            </div>
+            <div class="alert-cta-row">
+              <button class="btn-sm-outline" onclick="event.stopPropagation()">Dismiss</button>
+              <button class="btn-sm-primary" onclick="event.stopPropagation()">Add to List</button>
+            </div>
+          </div>
+
+          <!-- Card 2 — On Sale -->
+          <div class="alert-card">
+            <div class="alert-card-header">
+              <div class="alert-card-icon on-sale">🍳</div>
+              <div class="alert-card-info">
+                <div class="alert-card-title">Free-Run Eggs · 12pk</div>
+                <div class="alert-card-sub">Loblaws · Expires Tuesday</div>
+              </div>
+              <span class="alert-card-badge good">ON SALE</span>
+            </div>
+            <div class="alert-divider"></div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">Current</span>
+              <span class="alert-deal-value red">$5.99 <span style="font-size:10px;opacity:.7">(was $7.49)</span></span>
+            </div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">You save</span>
+              <span class="alert-deal-value green">$1.50 · −20%</span>
+            </div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">Replenishment</span>
+              <span class="alert-deal-value" style="color:var(--color-text-muted)">Due in ~9 days · Early</span>
+            </div>
+            <div class="alert-cta-row">
+              <button class="btn-sm-outline">Dismiss</button>
+              <button class="btn-sm-primary">Add to List</button>
+            </div>
+          </div>
+
+          <!-- Card 3 — Running Low -->
+          <div class="alert-card">
+            <div class="alert-card-header">
+              <div class="alert-card-icon replen">🧀</div>
+              <div class="alert-card-info">
+                <div class="alert-card-title">Old Cheddar · 400g</div>
+                <div class="alert-card-sub">Last bought 17 days ago</div>
+              </div>
+              <span class="alert-card-badge new">RUNNING LOW</span>
+            </div>
+            <div class="alert-divider"></div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">Your avg cycle</span>
+              <span class="alert-deal-value blue">18 days</span>
+            </div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">Best current price</span>
+              <span class="alert-deal-value">$6.99 @ No Frills</span>
+            </div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">Sale status</span>
+              <span class="alert-deal-value" style="color:var(--color-text-muted)">No active sale · Avg $7.49</span>
+            </div>
+            <div class="alert-cta-row">
+              <button class="btn-sm-outline">Snooze</button>
+              <button class="btn-sm-primary">Add to List</button>
+            </div>
+          </div>
+
+          <!-- Card 4 — Watching -->
+          <div class="alert-card">
+            <div class="alert-card-header">
+              <div class="alert-card-icon low-stock" style="background:var(--color-surface-offset)">🫒</div>
+              <div class="alert-card-info">
+                <div class="alert-card-title">Extra Virgin Olive Oil · 750ml</div>
+                <div class="alert-card-sub">Watching · Alert below $12.00</div>
+              </div>
+              <span class="alert-card-badge" style="background:var(--color-surface-offset);color:var(--color-text-muted)">WATCHING</span>
+            </div>
+            <div class="alert-divider"></div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">Current best</span>
+              <span class="alert-deal-value">$13.49 @ Costco</span>
+            </div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">Your target</span>
+              <span class="alert-deal-value" style="color:var(--color-text-muted)">$12.00 · $1.49 away</span>
+            </div>
+            <div class="alert-deal-row">
+              <span class="alert-deal-label">Last on target</span>
+              <span class="alert-deal-value blue">~6 weeks ago</span>
+            </div>
+            <div class="alert-cta-row">
+              <button class="btn-sm-outline">Edit Target</button>
+              <button class="btn-sm-primary">View Detail</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="annotation" style="margin-top:var(--space-3)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          <p><strong>Review note:</strong> Card 2 (Eggs) is on sale but replenishment is 9 days away. Should "early buy" deals show with a lower prominence? Or let user filter by "Good Timing Only"? Card 3 shows no active sale — still alert or wait?</p>
+        </div>
+
+        <!-- Alert Settings Link -->
+        <div class="section-heading">Alert Preferences</div>
+        <div class="settings-section" style="margin-bottom:var(--space-8)">
+          <div class="settings-row">
+            <div class="settings-row-left">
+              <div class="settings-row-icon">📉</div>
+              <div>
+                <div class="settings-row-label">Price Drop Alerts</div>
+                <div class="settings-row-sub">Notify on genuine lows for my items</div>
+              </div>
+            </div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="settings-row">
+            <div class="settings-row-left">
+              <div class="settings-row-icon">🔄</div>
+              <div>
+                <div class="settings-row-label">Replenishment Alerts</div>
+                <div class="settings-row-sub">Alert 3 days before I usually run out</div>
+              </div>
+            </div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="settings-row">
+            <div class="settings-row-left">
+              <div class="settings-row-icon">⏰</div>
+              <div>
+                <div class="settings-row-label">Quiet Hours</div>
+                <div class="settings-row-sub">10 PM – 7 AM</div>
+              </div>
+            </div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="settings-row">
+            <div class="settings-row-left">
+              <div class="settings-row-icon">🎯</div>
+              <div>
+                <div class="settings-row-label">Timing Filter</div>
+                <div class="settings-row-sub">Only alert when sale + replen align</div>
+              </div>
+            </div>
+            <div class="toggle" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Nav -->
+      <div class="bottom-nav">
+        <div class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Home</span></div>
+        <div class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg><span>Receipts</span></div>
+        <div class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zM12 8v4l3 3"/></svg><span>Prices</span></div>
+        <div class="nav-item active"><div style="position:relative"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg><div class="nav-badge"></div></div><span>Alerts</span></div>
+        <div class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg><span>Profile</span></div>
+      </div>
+    </div>
+
+  </div><!-- /phone -->
+
+  <!-- REVIEW NOTES -->
+  <div style="margin-top:var(--space-8);padding:var(--space-6);background:var(--color-surface);border-radius:var(--radius-xl);border:1px solid var(--color-border)">
+    <div style="font-size:var(--text-base);font-weight:700;margin-bottom:var(--space-4)">🔍 Batch 3 Review Questions</div>
+    <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+      <div>
+        <div style="font-size:var(--text-sm);font-weight:700;color:var(--color-primary);margin-bottom:var(--space-1)">Screen 7 — Item Detail</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--space-2)">
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--space-4);border-left:2px solid var(--color-primary-highlight)">📊 Price chart: Show <strong>retail price</strong> vs <strong>your avg paid</strong>? Or retail only + event dots?</li>
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--space-4);border-left:2px solid var(--color-primary-highlight)">🏷️ "All-Time Low" badge — based on user's personal history or market-wide history?</li>
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--space-4);border-left:2px solid var(--color-primary-highlight)">📦 Stock-up quantity (2 units) — is this manually set or auto-calculated from receipt frequency?</li>
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--space-4);border-left:2px solid var(--color-primary-highlight)">🗺️ Store comparison — pull from Flipp API live or cached data with freshness indicator?</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:var(--text-sm);font-weight:700;color:var(--color-notification);margin-bottom:var(--space-1)">Screen 8 — Alerts / Deal Sheet</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--space-2)">
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--space-4);border-left:2px solid var(--color-notification-highlight)">⏰ Card sort order: urgency first, savings first, or replenishment timing first?</li>
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--space-4);border-left:2px solid var(--color-notification-highlight)">🥚 "Early buy" deals (sale but not yet due) — show or suppress by default?</li>
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--color-text-muted)padding-left:var(--space-4);border-left:2px solid var(--color-notification-highlight)">🧀 Running Low but no sale — notify or wait for a price event?</li>
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--space-4);border-left:2px solid var(--color-notification-highlight)">💰 "$7.40 savings" summary banner — helpful or feels like a gamification trick?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab-pill').forEach((t,i)=>{
+    t.classList.toggle('active', (i===0&&id==='screen-detail')||(i===1&&id==='screen-alerts'));
+  });
+  document.getElementById('phone').scrollTop=0;
+}
+function toggleTheme(){
+  const html=document.documentElement;
+  const isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  document.getElementById('theme-btn').textContent=isDark?'🌙':'☀️';
+}
+function openAlertSheet(){
+  document.getElementById('alert-sheet').classList.add('visible');
+}
+function closeAlertSheet(e){
+  if(!e||e.target===document.getElementById('alert-sheet'))
+    document.getElementById('alert-sheet').classList.remove('visible');
+}
+function selectOption(el){
+  el.closest('.sheet-option-list').querySelectorAll('.sheet-option').forEach(o=>{
+    o.classList.remove('selected');
+    o.querySelector('.checkmark').innerHTML='';
+  });
+  el.classList.add('selected');
+  el.querySelector('.checkmark').innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>';
+}
+function switchRange(btn){
+  btn.closest('.chart-range-btns').querySelectorAll('.range-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function switchFilter(btn){
+  btn.closest('.filter-row').querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+(function(){
+  const d=matchMedia('(prefers-color-scheme: dark)').matches;
+  if(d){document.documentElement.setAttribute('data-theme','dark');document.getElementById('theme-btn').textContent='☀️';}
+})();
+</script>
+</body>
+</html>
